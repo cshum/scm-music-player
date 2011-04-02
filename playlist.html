@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>SCM Music Player</title>
+<link rel="stylesheet" type="text/css" href="reset.css" />
+<style type="text/css"> 
+body{overflow:hidden; font-size:11px;  font-family:Verdana,Arial,sans-serif; cursor:default; line-height:1.2;  }
+ 
+#playlist{ border-bottom:1px solid; }
+#playlist .module{ border:1px solid; border-bottom:none; }
+#playlist h3{ border-bottom:1px solid; font-weight:bold; padding: 3px;}
+ 
+#playlist #playlistItems{ overflow-x:hidden; overflow-y:auto; }
+#playlist #sample{display:none;}
+#playlist li{ cursor:pointer; }
+ 
+.itemTextOnly{ padding: 3px; width:2000px; }
+.itemTextMore{ padding: 3px;}
+.itemTextMore .title{  font-weight:bold; }
+</style> 
+<script type="text/javascript" >
+var hasPlaylist = true;
+try{
+	var SCMData = eval('('+window.parent.document.getElementById("data").title+')');
+	document.write('<link rel="stylesheet" type="text/css" href="'+(SCMData.skin || 'skins/tunes/skin.css')+'" />');
+}catch(e){
+	hasPlaylist = false;
+	location.href = "http://scmplayer.net";
+}
+</script>
+</head>
+
+<body>
+
+<div id="playlist"> 
+	<div id="sample"> 
+		<ol> 
+		<li class="itemTextOnly item"><span class="number"></span>. <span class="title"></span></li> 
+		<li class="itemTextMore item"><span class="title"></span><br /><span class="description"></span></li> 
+		</ol> 
+	</div> 
+	<div class="module" id="playlistModule"> 
+		<h3>Playlist</h3> 
+		<ol id="playlistItems"> 
+		<li class="itemTextOnly">Loading...</li> 
+		</ol> 
+	</div> 
+
+	<div class="module" style="background:#000;text-align:center;" >
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-6799082498278077";
+	/* SCM Image ads */
+	google_ad_slot = "5274592921";
+	google_ad_width = 200;
+	google_ad_height = 200;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	</div>
+
+
+</div> 
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools-yui-compressed.js"></script>
+<script type="text/javascript" src="SCM.js"></script>
+<script type="text/javascript">
+if(hasPlaylist){
+	window.addEvent(Browser.Engine.trident ? "load": "domready",function(){
+		$$("div").addEvent("mousedown",function(e){
+			e.stop();
+		});
+		window.listUI = new SCM.ListUI();
+	});
+}
+
+</script>
+</body>
+</html>

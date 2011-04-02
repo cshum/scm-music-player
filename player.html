@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="robots" content="noindex" />
+<title>SCM Music Player</title>
+<link rel="stylesheet" type="text/css" href="reset.css" />
+<style type="text/css">
+#player,#player #mainImage,#player #volumeSlider,#player .item,
+#player #seekerSlider,#player #seeker,#player #seekerMask,
+#player #baseLeft, #player #baseRight{ height:25px; }
+
+#player #seekerBase{ border:1px solid; top:8px; height:6px; left:-1px;  }
+#player #seekerBuffered{ top:8px; height:8px; width:0;  }
+#player #seekerSliderBase{ left:-3.5px; width:7px; height:8px; top:8px; }
+#player #seeker{ width:1px; height:25px; }
+</style>
+<script type="text/javascript" >
+var SCMData = eval('('+window.parent.document.getElementById("data").title+')');
+document.write('<link rel="stylesheet" type="text/css" href="'+(SCMData.skin || 'skins/tunes/skin.css')+'" />');
+</script>
+<style type="text/css">
+html,body{ overflow:hidden;  }
+body{ font-size:11px; font-family:Verdana, Arial, Helvetica, sans-serif; }
+
+#player{ width:100%; }
+#player div{ position:absolute; }
+#player a{ text-decoration:none; }
+#player a:hover{ text-decoration:underline; }
+
+#player #baseLeft{ z-index:1; }
+#player #baseRight{ z-index:1; right:0; background-position:right top; }
+#player .item{ z-index:2; }
+#player .text{ z-index:2; font-size:11px; height:20px; top:6px; cursor:default; }
+#player .button,#player .handler{cursor:pointer; }
+
+
+#player #seeker{display:none;}
+#player #seekerBuffered { z-index:0; }
+#player #seekerBase { z-index:1; width:100%; }
+#player #seekerSlider { z-index:2; }
+#player #seekerMask { z-index:3; width:100%;}
+#player #tooltip{ width:115px; text-align:center; }
+
+#ytplayer{ z-index:1667; position:absolute; left:-1667px; top:-1667px; }
+</style>
+<!--[if lt IE 7]>
+<style type="text/css">
+/* IE6 div min height fix */
+#player #seeker div { line-height:0; font-size:1px; }
+</style>
+<![endif]--> 
+</head>
+
+<body>
+<div id="player">
+<div class="item button" id="previous"></div>
+<div class="item button" id="play"></div>
+<div class="item button" id="pause"></div>
+<div class="item button" id="next"></div>
+<div class="text" id="title">Initializing...</div>
+<div class="item" id="seeker">
+	<div id="seekerBase"></div>
+	<div id="seekerBuffered"></div>
+	<div id="seekerSlider">
+		<div id="seekerSliderBase"></div>
+	</div>
+	<div id="seekerMask" class="handler"></div>
+</div>
+<div class="text" id="tooltip">
+	<a href="http://scmplayer.net" target="_blank" >SCM Music Player</a>
+</div>
+<div class="text item" id="timer">00:00|00:00</div>
+<div class="item" id="volume">
+	<div class="handler" id="volumeSlider"></div>
+</div>
+<div class="item button" id="list"></div>
+<div class="mainImage" id="baseRight"></div>
+<div class="mainImage" id="baseLeft"></div>
+</div>
+
+
+<div id="ytplayerdiv"></div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools-yui-compressed.js"></script>
+<script type="text/javascript" src="mootools-1.2.4.4-more.js"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script type="text/javascript" src="soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" src="SCM.js"></script>
+<script type="text/javascript">
+soundManager.url = "swf/";
+soundManager.useFlashBlock = false;
+soundManager.debugMode = false;
+swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&version=3","ytplayerdiv", 
+"10", "10", "8", null, null, { allowScriptAccess: "always" }, { id: "ytplayer" });
+
+
+(function(){
+	var listFirstRun = true;
+	var ready = function(){
+		var barUI = new SCM.BarUI({
+			onPlaylistToggle:function(){
+				var innerHalf = window.parent.document.getElementById("innerHalf");
+				var playlist = window.parent.document.getElementById("playlist");
+				if (innerHalf.cols == "0,*,1"){
+					if(listFirstRun){
+						playlist.src="playlist.html"
+					}
+					innerHalf.cols = "0,*,202";
+				}else 
+					innerHalf.cols = "0,*,1";
+				listFirstRun = false;
+			}
+		});
+		barUI.setTitle("Loading Playlist...");
+		
+		new SCM.PlaylistFetcher(SCMData.playlist,{
+			onComplete:function(playlist){
+				var player = new SCM.Player("scmplayer","ytplayer",playlist,SCMData.playback);
+				barUI.setPlayer(player);
+				
+				var checkListUI = function(){
+					var listUI = window.parent.frames["playlist"].listUI;
+					if(listUI){
+						$clear(checkListUI);
+						listUI.setPlayer(player);
+					}
+				}.periodical(100);
+			},
+			onError:function(){
+				barUI.setTitle("Error Loading Playlist.");
+			}
+		});
+	}
+	//detect whether all youtube & soundmanager are ready
+	var loadCount = 0;
+	var loadStep = function(){
+		loadCount++;
+		if(loadCount==3)
+			ready();
+	}
+	window.onYouTubePlayerReady = function(id){
+		loadStep();
+	}
+	soundManager.onready(function(){
+		loadStep();
+	}); 
+	window.addEvent(Browser.Engine.trident ? "load": "domready",function(){
+		loadStep();
+		$$("div").addEvent("mousedown",function(e){
+			e.stop();
+		});
+	});
+	
+})();
+
+//todo: fix youtube IE leak
+
+</script>
+
+</body>
+
+</html>

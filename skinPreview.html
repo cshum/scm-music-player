@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="robots" content="noindex" />
+<title>SCM Music Player Skin Preview</title>
+<link rel="stylesheet" type="text/css" href="reset.css" />
+<style type="text/css">
+#player,#player #mainImage,#player #volumeSlider,#player .item,
+#player #seekerSlider,#player #seeker,#player #seekerMask,
+#player #baseLeft, #player #baseRight{ height:25px; }
+
+#player #seekerBase{ border:1px solid; top:8px; height:6px; left:-1px;  }
+#player #seekerBuffered{ top:8px; height:8px; width:0;  }
+#player #seekerSliderBase{ left:-3.5px; width:7px; height:8px; top:8px; }
+#player #seeker{ width:1px; height:25px; }
+</style>
+<script type="text/javascript">
+(function(){
+document.write('<link rel="stylesheet" type="text/css" href="'+location.hash.substr(1)+'" />');
+}());
+
+</script>
+<style type="text/css">
+html,body{ overflow:hidden;  }
+body{ font-size:11px; font-family:Verdana, Arial, Helvetica, sans-serif; }
+
+#player{ width:100%; }
+#player div{ position:absolute; }
+#player a{ text-decoration:none; }
+#player a:hover{ text-decoration:underline; }
+
+#player #baseLeft{ z-index:1; }
+#player #baseRight{ z-index:1; right:0; background-position:right top; }
+#player .item{ z-index:2; }
+#player .text{ z-index:2; font-size:11px; height:20px; top:6px; cursor:default; }
+#player .button,#player .handler{cursor:pointer; }
+
+
+#player #seeker{display:none;}
+#player #seekerBuffered { z-index:0; }
+#player #seekerBase { z-index:1; width:100%; }
+#player #seekerSlider { z-index:2; }
+#player #seekerMask { z-index:3; width:100%;}
+#player #tooltip{ width:115px; text-align:center; }
+
+#ytplayer{ z-index:1667; position:absolute; left:-1667px; top:-1667px; }
+</style>
+</head>
+
+<body>
+<div id="player">
+<div class="text" id="title">SCM Music Player</div>
+<div class="item" id="volume">
+	<div class="handler" id="volumeSlider"></div>
+</div>
+<div class="mainImage" id="baseRight"></div>
+<div class="mainImage" id="baseLeft"></div>
+</div>
+
+</body>
+</html>
