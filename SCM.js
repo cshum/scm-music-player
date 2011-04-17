@@ -339,7 +339,7 @@ SCM.PlaylistFetcher = new Class({
 				//Youtube Playlist
 				new Request.JSONP({
 				    url: "http://gdata.youtube.com/feeds/api/playlists/"+
-				    SCM.parseYoutubePlaylistId(data)+"?alt=json",
+				    SCM.parseYoutubePlaylistId(data)+"?alt=json&max-results=50",
 				    method: "get",
 				    onComplete: function(data){
 				        data.feed.entry.each(function(el){
