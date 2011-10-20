@@ -79,15 +79,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <div id="content">
 <p class="large"><a href="http://scmplayer.net">SCM Music Player</a> is a free and open source web music player, that brings a seamless music experience to your website. Support Wordpress, Tumblr, Blogger.</p>
 
-<ul class="bullet"> 
-<li><strong>Continous Playback Cross Pages</strong> - Seamless playback throughout your site.</li> 
-<li><strong>Custom Skinning</strong> - Skins to match your look and feel. Choose or design your own. </li> 
-<li><strong>Plays Everything</strong> - Support MP3, MP4, RTMP, XSPF, RSS or Youtube Playlist. Make it dynamic.</li> 
-<li><strong>Save Spaces</strong> - Dockable playback module on top or bottom, while playlist can be toggled.</li> 
-<li><strong>Setup Wizard</strong> - Create your SCM Music Player without any pain.</li> 
-<li><strong>Cross Browsers</strong> - Compatible on Google Chrome, Opera, Firefox, Safari, IE 6+.</li> 
-</ul> 
-
 <a name="wizard"></a>
 <h3>SETUP WIZARD</h3>
 <ul class="bullet"> 
@@ -268,14 +259,14 @@ You can fork my source code, or report issues at Github.
 
 
 <h3 id="about">ABOUT</h3> 
-<p>SCM Music Player is a free and open source web music player, with powerful features that brings a seamless music experience for your website. Built with</p> 
+<p><a href="http://scmplayer.net">SCM Music Player</a> is a free and open source web music player, with powerful features that brings a seamless music experience for your website. Built with</p> 
 <ul class="bullet"> 
 <li>Mootools - Javascript Framework (<a href="http://mootools.net">http://mootools.net</a>)</li> 
 <li>SoundManager 2 - Javascript Sound API (<a href="http://www.schillmania.com/projects/soundmanager2/">http://www.schillmania.com/projects/soundmanager2/</a>) </li> 
 <li>YouTube Javascript API (<a href="http://code.google.com/apis/youtube/js_api_reference.html">http://code.google.com/apis/youtube/js_api_reference.html</a>)</li> 
 </ul> 
  
-<p>SCM Music Player is created by <a href="http://cshum.com">Adrian C Shum</a>, an undergraduate studying at Imperial College London. Trying to get my desire into web technologies, by creating fun and useful stuffs for the web.</p> 
+<p>SCM Music Player is created by <a href="http://cshum.com">Adrian C Shum</a>. Trying to get my desire into web technologies, by creating fun and useful stuffs for the web.</p> 
  
 <h3 id="contact">CONTACT</h3> 
 <ul class="bullet"> 
