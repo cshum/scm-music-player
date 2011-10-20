@@ -77,7 +77,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 
 <div id="content">
-<p class="large">SCM Music Player is a free and open source web music player, that brings a seamless music experience to your website. Support Wordpress, Tumblr, Blogger.</p>
+<p class="large"><a href="http://scmplayer.net">SCM Music Player</a> is a free and open source web music player, that brings a seamless music experience to your website. Support Wordpress, Tumblr, Blogger.</p>
 
 <ul class="bullet"> 
 <li><strong>Continous Playback Cross Pages</strong> - Seamless playback throughout your site.</li> 
