@@ -13,7 +13,6 @@ if(strpos($_SERVER['SERVER_NAME'],"asweb.info") !== false){
 <head>
 
 <title>SCM Music Player - seamless music for your website.</title>
-<meta name="description" content="Free and open source web music player. Support Wordpress, Tumblr, Xanga, Blogger, MP3, AAC, Youtube, XSPF, skinning." /> 
 <link rel="stylesheet" type="text/css" href="reset.css" />
 <link rel="stylesheet" type="text/css" href="site.css" />
 <style type="text/css">
@@ -41,7 +40,7 @@ SCMMusicPlayer.init("{'skin':'skins/cyber/skin.css','playback':{'autostart':'fal
 <div style="background:#666;color:#fff;">
 <div id="title">
 <p class="caption">seamless music for your website</p>
-<h2>SCM Music Player</h2>
+<h2><a href="http://scmplayer.net">SCM Music Player</a></h2>
 
 </div>
 </div>
