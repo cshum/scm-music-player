@@ -1,10 +1,6 @@
 <?php 
 require "config.php";
 
-if(strpos($_SERVER['SERVER_NAME'],"asweb.info") !== false){
-	header( 'Location: http://scmplayer.net' ) ;
-}
-
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -31,8 +27,6 @@ if(strpos($_SERVER['SERVER_NAME'],"asweb.info") !== false){
 SCMMusicPlayer.init("{'skin':'skins/cyber/skin.css','playback':{'autostart':'false','shuffle':'false','volume':'50'},'playlist':[{'title':'Never Gonna Give You Up','url':'http://www.youtube.com/watch?v=oHg5SJYRHA0'},{'title':'8-Bit Rick Roll','url':'http://www.youtube.com/watch?v=b1WWpKEPdT4'},{'title':'Trolololololol','url':'http://www.youtube.com/watch?v=2Z4m4lnjxkY'},{'title':'Rick Roll Reversed','url':'http://www.youtube.com/watch?v=aD4bn5pp32w'},{'title':'Scary Roll','url':'http://www.youtube.com/watch?v=Jwj0gLriTnk'},{'title':'Who Killed Captain Alex','url':'http://www.youtube.com/watch?v=BymeLkZ7GqM'},{'title':'Who Killed Captain Alex Remix','url':'http://www.youtube.com/watch?v=_51NDCK6uIU'},{'title':'Never Gonna Give You Up','url':'http://www.youtube.com/watch?v=oHg5SJYRHA0'},{'title':'8-Bit Rick Roll','url':'http://www.youtube.com/watch?v=b1WWpKEPdT4'}],'placement':'bottom','showplaylist':'false'}");
 //--></script>
 <!--End of SCM Music Player script-->
-
-
 
 
 <a href="http://github.com/cshum/SCM-Music-Player/" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
@@ -275,11 +269,7 @@ You can fork my source code, or report issues at Github.
 </ul> 
 <p>You can contact me for comments, feedback and questions etc. 
 I will try to response, but I may be busy if you didn't get a reply for a week or two.</p> 
-
-
-
 </div>
-
 
 <div style="clear:both;padding-bottom:10px;"></div>
 </div>
