@@ -12,6 +12,7 @@ h3 { font-size:18px; height:18px; margin:5px 0; }
 h4{ font-size:14px; height:14px; }
 p,.bullet li{ font-size:14px; line-height:19px; }
 a{ color:#67f; }
+h2 a{ color:#fff; text-decoration:none; }
 
 #container,#title{ margin: 0 auto; padding:7px 0; width:870px; }
 #content{ width:690px;float:left; }
