@@ -7,7 +7,7 @@ require "config.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
+<meta name="robots" content="noindex" />
 <title>SCM Music Player - seamless music for your website.</title>
 <link rel="stylesheet" type="text/css" href="reset.css" />
 <link rel="stylesheet" type="text/css" href="site.css" />
