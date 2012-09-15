@@ -80,7 +80,7 @@ SCM.Player = new Class({
 		
 		//decide whether to change playback (yt or sm)
 		var url = this.playlist[this.index].url;
-		if(url.indexOf("youtube.com/")>-1 || url.indexOf("youtu.be/")>-1)
+		if(url.indexOf("youtube.com/")> -1 || url.indexOf("youtu.be/") > -1)
 			this.playback = this.youtubePlayback;
 		else
 			this.playback = this.soundManagerPlayback;
@@ -363,26 +363,8 @@ SCM.PlaylistFetcher = new Class({
 		//data can be a manual playlist object, or a playlist url String
 		if($type(data)=="string"){
 			//Proadcast
-			if(data.indexOf("youtube.com") > -1 && (data.indexOf("list=") > -1 || data.indexOf("p=") > -1 || data.indexOf("v=") > -1))
+			if(data.indexOf("youtu.be") > -1 || (data.indexOf("youtube.com") > -1 && (data.indexOf("list=") > -1 || data.indexOf("p=") > -1 || data.indexOf("v=") > -1)))
 			{
-				var id_playlist = '';
-				var id_video = '';
-				
-				if (data.indexOf("p=") > -1)
-				{
-					var idPos = data.indexOf("p=") + 2;
-					var ampPos = data.indexOf("&", idPos);
-					if (ampPos == -1) ampPos = data.length;
-					id_playlist = data.substr(idPos, ampPos - idPos);
-				}
-				else if (data.indexOf("list=") > -1)
-				{
-					var idPos = data.indexOf("list=") + 7;	// list= always appends PL before the ID for no good reason
-					var ampPos = data.indexOf("&", idPos);
-					if (ampPos == -1) ampPos = data.length;
-					id_playlist = data.substr(idPos, ampPos - idPos);
-				}
-
 				if (data.indexOf("p=") > -1 || data.indexOf("list=") > -1)
 				{
 					//Youtube Playlist
@@ -408,10 +390,11 @@ SCM.PlaylistFetcher = new Class({
 				}
 				else
 				{	// adding a single video
-					var idPos = data.indexOf("v=") + 2;		// has to have a "v=" since we searched for it earlier
+					var idPos = data.indexOf("v=") + 2;					// probably has a "v=" since we searched for it earlier
+					if (idPos == 1) idPos = data.indexOf(".be/") + 4;	// but if no "v=" was found, assume it's a youtu.be link
 					var ampPos = data.indexOf("&", idPos);
 					if (ampPos == -1) ampPos = data.length;
-					id_video = data.substr(idPos, ampPos - idPos);
+					var id_video = data.substr(idPos, ampPos - idPos);
 
 					//Youtube Video (single)
 					new Request.JSONP({	
@@ -433,7 +416,8 @@ SCM.PlaylistFetcher = new Class({
 								playlist.push({
 										title : data.entry.title.$t,
 										url : data.entry.link[0].href,
-										link : data.entry.link[0].href
+										link : data.entry.link[0].href,
+										access : ""
 								});
 							}
 							
@@ -457,7 +441,8 @@ SCM.PlaylistFetcher = new Class({
 					        		playlist.push({
 					        			title:el["title"],
 					        			link:el["info"],
-					        			url:el["location"]
+					        			url:el["location"],
+										access: ""
 					        		});
 					        	});
 					        }else if(data.rss){
@@ -467,7 +452,8 @@ SCM.PlaylistFetcher = new Class({
 					        		playlist.push({
 					        			title:el["title"],
 					        			url:el["enclosure"]["@attributes"]["url"],
-					        			link:el["link"]
+					        			link:el["link"],
+										access: ""
 					        		});
 					        	});
 					        	
