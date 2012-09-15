@@ -3,7 +3,6 @@
  * http://scmplayer.asweb.info
  * 
  */
-
 window.SCM = window.SCM || {};
 
 SCM.states = {
@@ -21,11 +20,13 @@ SCM.states = {
 
 SCM.Player = new Class({
 	Implements:[Options,Events],
+
 	options:{
 		volume:50,
 		autostart:false,
 		shuffle:false
 	},
+
 	initialize: function(smId,ytId,playlist,options){
 		var self = this;
 		this.setOptions(options);
@@ -59,66 +60,84 @@ SCM.Player = new Class({
 		
 		//delay a bit to have the listeners ready
 		if(this.options.autostart==true || this.options.autostart=="true")
-			(function(){ self.play(); }).delay(100);
+			(function(){ self.play(); }).delay(100);	// todo: make manual/ variable to compensate for lag
 	},
+
 	stateDispatcher:function(state){
 		this.fireEvent("statechange",state);
 		if(state==SCM.states.finish)
 			this.next();
 	},
+
 	start: function(index){
 		this.counter.setIndex(index);
+
 		//pause present song
 		if(this.playback)
 			this.playback.pause();
+			
 		this.index = index;
 		
 		//decide whether to change playback (yt or sm)
 		var url = this.playlist[this.index].url;
-		if(url.indexOf("youtube.com/")>-1)
+		if(url.indexOf("youtube.com/")> -1 || url.indexOf("youtu.be/") > -1)
 			this.playback = this.youtubePlayback;
 		else
 			this.playback = this.soundManagerPlayback;
+			
 		//start new song
 		this.stateDispatcher(SCM.states.start);
 		this.playback.start(url);
 	},
+
 	next: function(){
 		this.start(this.counter.getNext());
 	},
+
 	previous: function(){
 		this.start(this.counter.getPrevious());
 	},
+
 	play:function(){
 		if(!this.playback)
 			this.start(this.index);
+			
 		this.playback.play();
 	},
+
 	seek:function(time){
 		this.playback.seek(time);
 	},
+
 	pause:function(){
 		this.playback.pause();
 	},
+
 	setVolume:function(volume){
 		this.soundManagerPlayback.setVolume(volume);
 		this.youtubePlayback.setVolume(volume);
 	},
+
 	getBytesLoaded: function(){
 		return this.playback.getBytesLoaded() || 0;
 	},
+
 	getBytesTotal: function(){
 		return this.playback.getBytesTotal() || 0;
 	},
+
 	getPosition: function(){
 		return this.playback.getPosition() || 0;
 	},
+
 	getDuration: function(){
 		return this.playback.getDuration() || 0;
 	},
+
 	getPlaylist:function(){
 		return this.playlist;
 	},
+
 	getIndex:function(){
 		return this.index;
 	}
@@ -163,6 +182,7 @@ SCM.SoundManagerPlayback = new Class({
 		var self = this;
 		if (this.sound)
 			this.sound.destruct();
+			
 		this.sound = soundManager.createSound({
 			id: this.id,
 			url: url,
@@ -180,20 +200,20 @@ SCM.SoundManagerPlayback = new Class({
 	},
 	play: function(url){
 		if (this.sound)
-		this.sound.play();
+			this.sound.play();
 	},
 	pause: function(){
 		if (this.sound)
-		this.sound.pause();
+			this.sound.pause();
 	},
 	seek: function(time){
 		if (this.sound)
-		this.sound.setPosition(time*1000);
+			this.sound.setPosition(time*1000);
 	},
 	setVolume: function(volume){
 		this.volume = volume || this.volume;
 		if (this.sound)
-		this.sound.setVolume(this.volume);
+			this.sound.setVolume(this.volume);
 	},
 	getBytesLoaded: function(){
 		return this.sound ? this.sound.bytesLoaded: null;
@@ -211,15 +231,17 @@ SCM.SoundManagerPlayback = new Class({
 
 SCM.YoutubePlayback = new Class({
 	Extends: SCM.PlaybackTemplate,
-	initialize: function(id, options){
+	
+	initialize: function(id, options)
+	{
 		this.parent(id,options);
-		
 		this.state = null;
 		
 		SCM.YoutubePlayback[this.id] = this;
 		$(this.id).addEventListener("onStateChange","SCM.YoutubePlayback."+this.id+".stateDispatcher");
 		$(this.id).addEventListener("onError","SCM.YoutubePlayback."+this.id+".errorDispatcher")
 	},
+	
 	start: function(url){
 		$(this.id).loadVideoById(SCM.parseYoutubeVideoId(url), 0, "small");
 		this.stateDispatcher(1);
@@ -294,11 +316,13 @@ SCM.Counter = new Class({
  */
 SCM.ShuffleCounter = new Class({
 	Extends:SCM.Counter,
+	
 	initialize:function(length){
 		this.parent(length);
 		this.played = [];
 		this.remaining = [];
 	},
+	
 	getNext:function(){
 		this.remaining.erase(this.index);
 		if(this.remaining.length==0)
@@ -310,6 +334,7 @@ SCM.ShuffleCounter = new Class({
 		this.played.push(no);
 		return no;
 	},
+	
 	getPrevious:function(){
 		if(this.played.length>1)
 			var no = this.played.pop();
@@ -324,35 +349,85 @@ SCM.ShuffleCounter = new Class({
  */
 SCM.PlaylistFetcher = new Class({
 	Implements: Options,
+	
 	options:{
 		onComplete:function(playlist){},
 		onError:function(){}
 	},
+	
 	initialize:function(data,options){
 		this.setOptions(options);
 		var self = this;
 		var playlist = [];
+		
 		//data can be a manual playlist object, or a playlist url String
 		if($type(data)=="string"){
 			//Proadcast
-			if(data.indexOf("youtube.com")>-1){
-				//Youtube Playlist
-				new Request.JSONP({
-				    url: "http://gdata.youtube.com/feeds/api/playlists/"+
-				    SCM.parseYoutubePlaylistId(data)+"?alt=json&max-results=50",
-				    method: "get",
-				    onComplete: function(data){
-				        data.feed.entry.each(function(el){
-				        	playlist.push({
-				        		title:el.title.$t,
-				        		url:el.link[0].href,
-				        		link:el.link[0].href
-				        	});
-				        });
-				        self.options.onComplete(playlist);
-				    }
-				}).send();
-			}else{
+			if(data.indexOf("youtu.be") > -1 || (data.indexOf("youtube.com") > -1 && (data.indexOf("list=") > -1 || data.indexOf("p=") > -1 || data.indexOf("v=") > -1)))
+			{
+				if (data.indexOf("p=") > -1 || data.indexOf("list=") > -1)
+				{
+					//Youtube Playlist
+					new Request.JSONP({
+						url: "http://gdata.youtube.com/feeds/api/playlists/"+SCM.parseYoutubePlaylistId(data)+"?alt=json&max-results=50",
+						method: "get",
+						onComplete: function(data){
+							data.feed.entry.each(function(el)
+							{
+								var restrictions = "";
+								if (el.app$control && el.app$control.yt$state && el.app$control.yt$state.name) restrictions = el.app$control.yt$state.name;
+
+								playlist.push({
+									title : el.title.$t,
+									url : el.link[0].href,
+									link : el.link[0].href,
+									access : restrictions
+								});
+							});
+							self.options.onComplete(playlist);
+						}
+					}).send();
+				}
+				else
+				{	// adding a single video
+					var idPos = data.indexOf("v=") + 2;					// probably has a "v=" since we searched for it earlier
+					if (idPos == 1) idPos = data.indexOf(".be/") + 4;	// but if no "v=" was found, assume it's a youtu.be link
+					var ampPos = data.indexOf("&", idPos);
+					if (ampPos == -1) ampPos = data.length;
+					var id_video = data.substr(idPos, ampPos - idPos);
+
+					//Youtube Video (single)
+					new Request.JSONP({	
+						url: "https://gdata.youtube.com/feeds/api/videos/"+id_video+"?alt=json",
+						method: "get",
+						onComplete: function(data)
+						{
+							if ($type(data)=="string" && data.indexOf("Invalid id") > -1)
+							{	// not a video we can retreive
+								playlist.push({
+									title : '-unknown-',
+									url : '',
+									link : '',
+									access : 'restricted'
+								});							
+							}
+							else
+							{
+								playlist.push({
+										title : data.entry.title.$t,
+										url : data.entry.link[0].href,
+										link : data.entry.link[0].href,
+										access : ""
+								});
+							}
+							
+							self.options.onComplete(playlist);
+						}
+					}).send();
+				}
+			}
+			else
+			{
 				//Other playlist format (itunes rss or xspf)
 				new Request.JSON({
 				    url: "fetch.php?url=" + encodeURIComponent(data),
@@ -366,7 +441,8 @@ SCM.PlaylistFetcher = new Class({
 					        		playlist.push({
 					        			title:el["title"],
 					        			link:el["info"],
-					        			url:el["location"]
+					        			url:el["location"],
+										access: ""
 					        		});
 					        	});
 					        }else if(data.rss){
@@ -376,7 +452,8 @@ SCM.PlaylistFetcher = new Class({
 					        		playlist.push({
 					        			title:el["title"],
 					        			url:el["enclosure"]["@attributes"]["url"],
-					        			link:el["link"]
+					        			link:el["link"],
+										access: ""
 					        		});
 					        	});
 					        	
@@ -627,15 +704,18 @@ SCM.ListUI = new Class({
 			$("playlistItems").setStyle("height",Math.max(window.getSize().y-exceeded, 200));
 		}
 		resizer();
+		
 		if (Browser.Engine.name == 'trident')
 			window.setInterval(resizer, 100);
 		else 
 			window.addEvent("resize", resizer);
 	},
+	
 	onPlayerReady:function(player){
 		var self = this;
 		this.player = player;
 		$("playlistItems").empty();
+		
 		player.getPlaylist().each(function(item,index){
 			var $item = $$(".itemTextOnly")[0].clone();
 			$item.getElements(".title").set("text",item.title);
@@ -645,16 +725,20 @@ SCM.ListUI = new Class({
 				player.start(index);
 				self.updateFocus(index);
 			});
+			
 			$item.inject("playlistItems");
 		});
+		
 		$("playlistItems").getElements("li:odd").addClass("odd");
 		$("playlistItems").getElements("li:even").addClass("even");
 		this.updateFocus(this.player.getIndex());
 	},
+	
 	onStateChange:function(state){
 		if(state==SCM.states.start)
 			this.updateFocus(this.player.getIndex());
 	},
+
 	updateFocus:function(index){
 		if(this.index!=null){
 			$("playlistItems")
@@ -684,6 +768,11 @@ SCM.parseYoutubeVideoId = function(url){
 	return id;
 }
 SCM.parseYoutubePlaylistId = function(url){
-	return url.substr(url.indexOf("p=")+2,16);
+	if (url.indexOf("p=") > -1)
+		return url.substr(url.indexOf("p=")+2,16);
+	else if (url.indexOf("list=") > -1)
+		return url.substr(url.indexOf("list=")+7,16);
+	else
+		return '';
 }
 
