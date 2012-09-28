@@ -1,0 +1,15 @@
+<div id="playlist">
+	<div class="module"> 
+		<h3>Playlist</h3> 
+	</div> 
+	<div class="module" id="playlistContainer">
+		<ol class="items" data-bind="foreach: playlist"> 
+			<li class="item" data-bind="
+			click:$parent.play,
+			css:{focus:on, even:$index()%2==1, odd:$index()%2==0}
+			">
+				<span class="title" data-bind="text:title"></span>
+			</li> 
+		</ol> 
+	</div>
+</div>

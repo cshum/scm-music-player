@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex" />
+<title>SCM Music Player</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<style type="text/css">
+body{overflow:hidden; background:transparent; }
+#contentW, #playlistW, #playerW{ position:absolute; }
+#contentW{z-index:10; top:0; bottom:0; left:0; right:0;}
+#playlistW{ z-index:1; right:0; top:0; bottom:0; width:0; }
+#playerW{z-index:2; left:0; right:0; height:0;}
+#content{ position:relative; height:100%; width:100%;  }
+</style>
+<link rel="stylesheet" type="text/css" href="css/scm.css" />
+<link rel="stylesheet" type="text/css" data-bind="attr:{href:skin}" id="skin" href="skins/tunes/skin.css" />
+
+</style>
+</head>
+<body>
+	<div id="contentW" data-bind="style:{top:placement()=='top'?'25px':'0',
+		bottom:placement()=='top'?'0':'25px', right:showPlaylist()?'202px':'0'}">
+	<script type="text/javascript">
+	(function(){
+		function fixURL(url){
+			if(url=='') return 'about:blank';
+			var dummy="scmmusicplayer=adrianshum";
+			if(url.indexOf('?')>0)
+				url=url.replace('?','?'+dummy+'&amp;');
+			else if(url.indexOf('#')>0)
+				url=url.replace('#','?'+dummy+'#');
+			else
+				url+='?'+dummy;
+			return url;
+		}
+		var url = fixURL(location.hash.substr(1));
+		var host = url.substr(0,url.indexOf('/',10));
+		document.write('<iframe src="'+url+'" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
+	})();
+	</script>
+</div>
+<div id="playerW" data-bind="style:{ top:placement()=='top'?'0':'auto', 
+	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
+<div id="playlistW" data-bind="style:{top:placement()=='top'?'25px':'0',
+		bottom:placement()=='top'?'0':'25px', width:showPlaylist()?'202px':'0'}"></div>
+
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="js/lib/require/require.js"></script>
+<script type="text/javascript" >
+require([
+	'knockout','jquery',
+	'text!view/player.html',
+	'text!view/playlist.html',
+	'scm','scm.ui',
+
+	'binding/maskbtn',
+	'binding/slider',
+	'binding/followLeft',
+	'binding/caption',
+	'binding/innerbound',
+
+	'domready!'
+	],function(ko,$,playerView,playlistView, SCM){
+		//load templates
+		$("#playerW").html(playerView);
+		$("#playlistW").html(playlistView);
+
+		SCM.skin('skins/cyber/skin.css');
+		SCM.isShuffle(true);
+		//SCM.loadPlaylist('http://downloads.bbc.co.uk/podcasts/worldservice/globalnews/rss.xml');
+		SCM.loadPlaylist('http://www.youtube.com/playlist?list=PL12D4A1A5C5DA416A&feature=g-all-a');
+		//SCM.loadPlaylist('http://www.youtube.com/playlist?list=PL4ED56136437E9969&feature=plcp');
+		//SCM knockout 
+		$('#skin,#contentW,#playerW,#playlistW').each(function(){
+			ko.applyBindings(SCM,this);
+		});
+	});
+</script>
+</body>
+</html>
