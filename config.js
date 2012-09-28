@@ -27,7 +27,6 @@ var requirejs = ({
 			url:'swf/',
 		}
 	},
-	baseUrl: 'js/',
-	urlArgs:"bust=" +  (new Date()).getTime()
+	baseUrl: 'js/'
 });
 
