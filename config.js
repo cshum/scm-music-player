@@ -4,8 +4,8 @@ var requirejs = ({
 		'jquery.ui': {deps: ['jquery'],exports: 'jQuery'}
 	},
 	paths: {
-		'jquery': 'lib/jquery/jquery-1.8.0.min',
-		'jquery.ui': 'lib/jquery/jquery-ui-1.8.23.custom.min',
+		'jquery': 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min',
+		'jquery.ui': 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min',
 		'underscore': 'lib/underscore/underscore',
 		'knockout':'lib/knockout/knockout-2.1.0',
 		'text': 'lib/require/text',
