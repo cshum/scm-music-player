@@ -1,6 +1,6 @@
 define(["scm","knockout","underscore"],function(SCM,ko,_){
-	var
-	skin = ko.observable('skins/tunes/skin.css'),
+
+var skin = ko.observable('skins/tunes/skin.css'),
 	placement = ko.observable('top'),
 	showPlaylist = ko.observable(true),
 	display = ko.computed(function(){

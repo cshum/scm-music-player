@@ -5,8 +5,8 @@ define([
 
 var	playback = null, 
 	current = (function(){
-		var empty = new Song({title:""});
-		var song = ko.observable(empty);
+		var empty = new Song({title:""}),
+			song = ko.observable(empty);
 		return ko.computed({
 			read: function(){
 				return song();
@@ -87,7 +87,7 @@ var	playback = null,
 			write:function(value){
 				isPlay(value);
 				//if current empty find stuff to play
-				if(value && !current().url()) 
+				if(value && !current().isValid()) 
 					next();
 			}
 		});
@@ -99,7 +99,7 @@ var	playback = null,
 	pause = _.bind(isPlay,this,false),
 	play = function(song){
 		if(song instanceof Song){ 
-			if(_.contains(playlist(),song)) 
+			if(!_.contains(playlist(),song)) 
 				playlist.push(song);
 			current(song); 
 		}
@@ -150,13 +150,12 @@ var	playback = null,
 			loadedFraction(0);
 
 			//setup new playback
-			var url = current().url();
-			if(url) 
+			if(current().isValid()) 
 				require(['playback/'+getModuleName(url)+'!'],
 				function(newPlayback){
 					message(null);
 					playback = newPlayback;
-					playback.on(url,finish);
+					playback.on(current().url(),finish);
 				});
 			else
 				pause();
