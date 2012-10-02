@@ -42,7 +42,7 @@
 		},
 
 		code = function(){
-			head.innerHTML += '<style type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form{ display:none;border:0;margin:0;padding:0; } #scmFrame{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>';
+			head.innerHTML += '<style id="scmcss" type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form{ display:none;border:0;margin:0;padding:0; } #scmFrame{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>';
 			
 			var scmFrame = document.createElement('iframe');
 			scmFrame.frameBorder = 0;
@@ -54,6 +54,8 @@
 			document.body.insertBefore(scmFrame,document.body.firstChild);
 			
 			addEvent(window,'load',function() {
+				while(head.firstChild.id!="scmcss")
+					head.removeChild(head.firstChild);
 				while(document.body.lastChild.id!="scmFrame")
 					document.body.removeChild(document.body.lastChild);
 			});
