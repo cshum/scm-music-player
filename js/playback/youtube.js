@@ -70,6 +70,7 @@ define([
 	function error(e){
 		var msg = 'Youtube Error '+e.data;
 		switch(e.data){
+			case 5: msg += ': HTML5 Error'; break;
 			case 2: msg += ': Invalid Link'; break;
 			case 101: msg += ': Cannot be played in embedded player'; break;
 			case 100: msg += ': Request not Found'; break;
