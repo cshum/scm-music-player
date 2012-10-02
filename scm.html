@@ -70,7 +70,7 @@ body{overflow:hidden; background:transparent; }
 <script type="text/javascript" src="js/lib/require/require.js"></script>
 <script type="text/javascript" >
 require([
-	'knockout','jquery',
+	'knockout','jquery','underscore',
 	'text!view/player.html',
 	'text!view/playlist.html',
 	'scm','song','scm.ui',
@@ -83,7 +83,7 @@ require([
 	'binding/innerbound',
 
 	'domready!'
-	],function(ko,$,playerView,playlistView,SCM,Song){
+	],function(ko,$,_,playerView,playlistView,SCM,Song){
 		$("#playerW").html(playerView);
 		$("#playlistW").html(playlistView);
 
@@ -98,6 +98,12 @@ require([
 			(new Function('SCM,Song',SCMQueue.shift()))(SCM,Song);
 		window.SCM = SCM;
 		window.Song = Song;
+
+		var resize = function(){
+			$('#content').height($('#contentW').height());
+		}
+		$(window).resize(_.throttle(resize,100));
+		resize();
 	});
 </script>
 </body>
