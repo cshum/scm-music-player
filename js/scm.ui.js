@@ -33,16 +33,17 @@ var skin = ko.observable('skins/tunes/skin.css'),
 	});
 
 	SCM.config = function(data){
-		SCM.skin(data.skin || 'skins/tunes/skin.css');
-		SCM.volume(parseInt(data.volume || 50));
-		SCM.isPlay(data.autoplay=='true' || data.autoplay);
-		SCM.isShuffle(data.shuffle=='true' || data.shuffle);
-		SCM.repeatMode(data.repeat || 0);
+		_.extend(data,data.playback);
+		if('skin' in data) SCM.skin(data.skin);
+		if('volume' in data) SCM.volume(parseInt(data.volume));
+		if('autoplay' in data) SCM.isPlay(data.autoplay!='false' && data.autoplay);
+		if('shuffle' in data) SCM.isShuffle(data.shuffle!='false' && data.shuffle);
+		if('repeat' in data) SCM.repeatMode(data.repeat);
 
-		SCM.placement(data.placement || 'top');
-		SCM.showPlaylist(data.showplaylist);
+		if('placement' in data) SCM.placement(data.placement);
+		if('showplaylist' in data) SCM.showPlaylist(data.showplaylist);
 
-		SCM.loadPlaylist(data.playlist);
+		if('playlist' in data) SCM.loadPlaylist(data.playlist);
 	};
 
 });
