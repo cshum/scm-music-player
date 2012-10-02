@@ -73,6 +73,16 @@
 							return document.body.clientHeight; 
 					})();
 				});
+
+				var hash = location.hash,
+				interval = setInterval(function(){
+					if(location.hash == hash) return;
+					hash = location.hash;
+					if(hash.indexOf('scm=')>-1)
+						window.scmframe.location.replace(hash.substr(5));
+				},50);
+				if(hash.indexOf('scm=')>-1)
+					location.replace(hash.substr(5));
 		},
 		inside = function(){
 			//fix links
@@ -84,6 +94,10 @@
 						//external links
 						window.open(target.href,'_blank');
 						window.focus();
+						e.preventDefault();
+					}else if(target.href.indexOf("http://")==0 ){
+						window.top.location.hash = 'scm='+target.href.replace(host,'');
+						window.top.scmframe = window;
 						e.preventDefault();
 					}
 				}

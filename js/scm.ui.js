@@ -21,7 +21,8 @@ var skin = ko.observable('skins/tunes/skin.css'),
 	})(),
 	togglePlaylist = function(){
 		showPlaylist(!showPlaylist());
-	};
+	},
+	first = true;
 
 	_.extend(SCM,{
 		skin:skin, 
@@ -33,6 +34,8 @@ var skin = ko.observable('skins/tunes/skin.css'),
 	});
 
 	SCM.config = function(data){
+		if(!first) return;
+		first = false;
 		_.extend(data,data.playback);
 		if('skin' in data) SCM.skin(data.skin);
 		if('volume' in data) SCM.volume(parseInt(data.volume));
