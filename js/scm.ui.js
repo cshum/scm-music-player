@@ -36,12 +36,13 @@ var skin = ko.observable('skins/tunes/skin.css'),
 		_.extend(data,data.playback);
 		if('skin' in data) SCM.skin(data.skin);
 		if('volume' in data) SCM.volume(parseInt(data.volume));
-		if('autoplay' in data) SCM.isPlay(data.autoplay!='false' && data.autoplay);
+		if('autoplay' in data) SCM.autoPlay(data.autoplay!='false' && data.autoplay);
+		if('autostart' in data) SCM.autoPlay(data.autostart!='false' && data.autostart);
 		if('shuffle' in data) SCM.isShuffle(data.shuffle!='false' && data.shuffle);
 		if('repeat' in data) SCM.repeatMode(data.repeat);
 
 		if('placement' in data) SCM.placement(data.placement);
-		if('showplaylist' in data) SCM.showPlaylist(data.showplaylist);
+		if('showplaylist' in data) SCM.showPlaylist(data.showplaylist!='false' && data.showplaylist);
 
 		if('playlist' in data) SCM.loadPlaylist(data.playlist);
 	};

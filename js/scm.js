@@ -24,6 +24,7 @@ var	playback = null,
 	})(),
 
 	playlist = ko.observableArray(),
+	autoPlay = ko.observable(false),
 	queue = playlist.push,
 	loadPlaylist = (function(){
 		var list = _.map(module.config().playlist,function(val,idx){
@@ -39,6 +40,7 @@ var	playback = null,
 			message(null);
 			var list = isShuffle() ? shuffledList():playlist();
 			current(list[0]);
+			isPlay(autoPlay());
 		}
 		return function(data){
 			message('Loading Playlist...');
@@ -189,6 +191,7 @@ var	playback = null,
 	return {
 		isShuffle:isShuffle, 
 		isPlay:isPlay,
+		autoPlay:autoPlay,
 		repeatMode:repeatMode,
 		volume:volume, 
 
