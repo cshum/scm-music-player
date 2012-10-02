@@ -23,9 +23,17 @@ body{overflow:hidden; background:transparent; }
 <body>
 	<div id="contentW" data-bind="style:{top:placement()=='top'?'25px':'0',
 		bottom:placement()=='top'?'0':'25px', right:showPlaylist()?'202px':'0'}">
-	<script type="text/javascript">
-	(function(){
-		function fixURL(url){
+<script type="text/javascript">
+(function(){
+	var addEvent = function(elm, evType, fn) {
+			if(elm.addEventListener) 
+				elm.addEventListener(evType, fn);
+			else if (elm.attachEvent) 
+				elm.attachEvent('on' + evType, fn);
+			else
+				elm['on' + evType] = fn;
+		},
+		fixURL = function(url){
 			if(url=='') return 'about:blank';
 			var dummy="scmmusicplayer=adrianshum";
 			if(url.indexOf('?')>0)
@@ -35,12 +43,23 @@ body{overflow:hidden; background:transparent; }
 			else
 				url+='?'+dummy;
 			return url;
-		}
-		var url = fixURL(location.hash.substr(1));
-		var host = url.substr(0,url.indexOf('/',10));
-		document.write('<iframe src="'+url+'" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
-	})();
-	</script>
+		},
+		url = fixURL(location.hash.substr(1)),
+		host = url.substr(0,url.indexOf('/',10));
+
+	window.SCMQueue = [];
+	addEvent(window,'message',function(e){
+		var data = e.data;
+		if(data.indexOf('SCM')!=0) 
+			return;
+		if(window.SCM && window.Song)
+			(new Function("SCM,Song",data))(SCM,Song);
+		else
+			SCMQueue.push(data);
+	});
+	document.write('<iframe src="'+url+'" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
+})();
+</script>
 </div>
 <div id="playerW" data-bind="style:{ top:placement()=='top'?'0':'auto', 
 	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
@@ -54,7 +73,7 @@ require([
 	'knockout','jquery',
 	'text!view/player.html',
 	'text!view/playlist.html',
-	'scm','scm.ui',
+	'scm','song','scm.ui',
 
 	'binding/maskbtn',
 	'binding/slider',
@@ -63,20 +82,21 @@ require([
 	'binding/innerbound',
 
 	'domready!'
-	],function(ko,$,playerView,playlistView, SCM){
-		//load templates
+	],function(ko,$,playerView,playlistView,SCM,Song){
 		$("#playerW").html(playerView);
 		$("#playlistW").html(playlistView);
 
-		SCM.skin('skins/cyber/skin.css');
-		SCM.isShuffle(true);
-		//SCM.loadPlaylist('http://downloads.bbc.co.uk/podcasts/worldservice/globalnews/rss.xml');
-		SCM.loadPlaylist('http://www.youtube.com/playlist?list=PL12D4A1A5C5DA416A&feature=g-all-a');
-		//SCM.loadPlaylist('http://www.youtube.com/playlist?list=PL4ED56136437E9969&feature=plcp');
-		//SCM knockout 
 		$('#skin,#contentW,#playerW,#playlistW').each(function(){
 			ko.applyBindings(SCM,this);
+			$(this).mousedown(function(){
+				return false;
+			});
 		});
+
+		while(SCMQueue.length > 0)
+			(new Function('SCM,Song',SCMQueue.pop()))(SCM,Song);
+		window.SCM = SCM;
+		window.Song = Song;
 	});
 </script>
 </body>

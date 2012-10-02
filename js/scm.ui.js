@@ -2,7 +2,7 @@ define(["scm","knockout","underscore"],function(SCM,ko,_){
 
 var skin = ko.observable('skins/tunes/skin.css'),
 	placement = ko.observable('top'),
-	showPlaylist = ko.observable(true),
+	showPlaylist = ko.observable(false),
 	display = ko.computed(function(){
 		return SCM.message() || SCM.current().title();
 	}),
@@ -31,4 +31,18 @@ var skin = ko.observable('skins/tunes/skin.css'),
 		display:display,
 		timer:timer
 	});
+
+	SCM.config = function(data){
+		SCM.skin(data.skin || 'skins/tunes/skin.css');
+		SCM.volume(parseInt(data.volume || 50));
+		SCM.isPlay(data.autoplay=='true' || data.autoplay);
+		SCM.isShuffle(data.shuffle=='true' || data.shuffle);
+		SCM.repeatMode(data.repeat || 0);
+
+		SCM.placement(data.placement || 'top');
+		SCM.showPlaylist(data.showplaylist);
+
+		SCM.loadPlaylist(data.playlist);
+	};
+
 });

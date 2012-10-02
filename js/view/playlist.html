@@ -5,7 +5,7 @@
 	<div class="module" id="playlistContainer">
 		<ol class="items" data-bind="foreach: playlist"> 
 			<li class="item" data-bind="
-			click:$parent.play,
+			click:$parent.play,event:{contextmenu:$parent.remove},
 			css:{focus:on, even:$index()%2==1, odd:$index()%2==0}
 			">
 				<span class="title" data-bind="text:title"></span>

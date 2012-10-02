@@ -105,6 +105,9 @@ var	playback = null,
 		}
 		isPlay(true);
 	},
+	remove = function(song){
+		playlist.remove(song);
+	},
 
 	changeRepeatMode = function(){
 		repeatMode((repeatMode()+1) % 3);
@@ -151,7 +154,7 @@ var	playback = null,
 
 			//setup new playback
 			if(current().isValid()) 
-				require(['playback/'+getModuleName(url)+'!'],
+				require(['playback/'+getModuleName(current().url())+'!'],
 				function(newPlayback){
 					message(null);
 					playback = newPlayback;
@@ -182,9 +185,7 @@ var	playback = null,
 		if(repeatMode()==2) start();
 		else next();
 	};
-
-
-
+	
 	return {
 		isShuffle:isShuffle, 
 		isPlay:isPlay,
@@ -202,6 +203,7 @@ var	playback = null,
 
 		playlist: playlist, 
 		queue: queue,
+		remove: remove,
 		loadPlaylist: loadPlaylist,
 
 		play:play, 
