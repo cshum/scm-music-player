@@ -94,7 +94,7 @@ require([
 		});
 
 		while(SCMQueue.length > 0)
-			(new Function('SCM,Song',SCMQueue.pop()))(SCM,Song);
+			(new Function('SCM,Song',SCMQueue.shift()))(SCM,Song);
 		window.SCM = SCM;
 		window.Song = Song;
 	});
