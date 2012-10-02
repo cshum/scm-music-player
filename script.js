@@ -3,7 +3,6 @@
 		scripts = document.getElementsByTagName('script'),
 		current = scripts[scripts.length-1],
 		head = document.getElementsByTagName("head")[0],
-		config = current.getAttribute('data-config'),
 		url = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
 		host = url.substr(0,url.indexOf('/',10)),
 		src = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+url,
@@ -103,9 +102,10 @@
 				}
 			});
 			
+			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				window.parent.postMessage('SCM.config('+config+')',host);
+				window.parent.postMessage('SCM.config({'+config+'})',host);
 		};
 
 	if(window.SCM) return;
@@ -116,7 +116,6 @@
 			obj = {},
 			post = function(key){
 				return function(arg){
-					if(isOutside) return;
 					var argStr = '';
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
@@ -129,14 +128,13 @@
 			obj[key] = post(key);
 		}
 		return obj;
-	})('config,queue,play,pause,next,previous,volume,'+
+	})('config,queue,play,pause,next,previous,volume,skin,'+
 	'loadPlaylist,changeRepeatMode,toggleShuffle,togglePlaylist');
 
 	init();
 
 	//compatibility
 	window.SCMMusicPlayer = {init: function(config){
-		if(isOutside) return;
 		window.parent.postMessage('SCM.config('+config+')',host);
 	}};
 
