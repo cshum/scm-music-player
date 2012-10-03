@@ -54,6 +54,9 @@ var	playback = null,
 	})(),
 	filteredList = (function(){
 		var list, isDirty = true;
+		playlist.subscribe(function(){
+			isDirty = true;
+		});
 		return function(){
 			if(!isDirty) return list;
 			list = _.filter(playlist(),function(song){
