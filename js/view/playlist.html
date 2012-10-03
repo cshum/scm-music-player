@@ -5,6 +5,7 @@
 	<div class="module" id="playlistContainer">
 		<ol class="items" data-bind="sortable: playlist"> 
 			<li class="item" data-bind="
+			visible:isValid(),
 			click:$root.play,event:{contextmenu:$root.remove},
 			css:{focus:on, even:$index()%2==1, odd:$index()%2==0}
 			">

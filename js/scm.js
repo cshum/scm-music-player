@@ -38,7 +38,7 @@ var	playback = null,
 		function done(result){
 			playlist(result);
 			message(null);
-			var list = isShuffle() ? shuffledList():playlist();
+			var list = isShuffle() ? shuffledList():filteredList();
 			current(list[0]);
 			isPlay(autoPlay());
 		}
@@ -50,6 +50,17 @@ var	playback = null,
 				done(_.map(data,function(item){
 					return new Song(item);
 				}));
+		}
+	})(),
+	filteredList = (function(){
+		var list, isDirty = true;
+		return function(){
+			if(!isDirty) return list;
+			list = _.filter(playlist(),function(song){
+				return song.isValid();
+			});
+			isDirty = false;
+			return list;
 		}
 	})(),
 
@@ -72,7 +83,7 @@ var	playback = null,
 		});
 		return function(){
 			if(!isDirty) return list;
-			list = shuffle(_.clone(playlist()));
+			list = shuffle(_.clone(filteredList()));
 			isDirty = false;
 			return list;
 		}
@@ -168,7 +179,7 @@ var	playback = null,
 	})(),
 
 	change = function(d){
-		var list = isShuffle() ? shuffledList():playlist();
+		var list = isShuffle() ? shuffledList():filteredList();
 		var len = list.length;
 		var i = d + _.indexOf(list,current());
 		//empty playlist or non repeat end
