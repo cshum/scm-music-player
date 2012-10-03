@@ -105,7 +105,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				window.parent.postMessage('SCM.config({'+config+'})',host);
+				window.parent.postMessage('SCM.config('+config+')',host);
 		};
 
 	if(window.SCM) return;
