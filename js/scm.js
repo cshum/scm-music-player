@@ -48,7 +48,10 @@ var	playback = null,
 				require(['playlist/'+getModuleName(data)+'!'+data],done);
 			else if(_.isArray(data))
 				done(_.map(data,function(item){
-					return new Song(item);
+					return new Song({
+						title:unescape(item.title), 
+						url:unescape(item.url)
+					});
 				}));
 		}
 	})(),
