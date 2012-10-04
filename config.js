@@ -1,7 +1,7 @@
 var requirejs = ({
 	shim: {
 		'underscore': {exports: '_'},
-		'jquery.ui': {deps: ['jquery'],exports: 'jQuery'}
+		'jquery.ui': {deps: ['jquery'],exports: 'jQuery'},
 		'jquery.scrollto': {deps: ['jquery'],exports: 'jQuery'}
 	},
 	paths: {
