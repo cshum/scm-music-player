@@ -108,7 +108,7 @@
 				window.parent.postMessage('SCM.config('+config+')',host);
 		};
 
-	if(window.SCM) return;
+	if(window.SCM && window.SCMMusicPlayer) return;
 
 	//SCM interface
 	window.SCM = (function(keys){
@@ -133,12 +133,11 @@
 		'loadPlaylist,repeatMode,isShuffle,showPlaylist,'+
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
+	SCM.init = function(config){
+		window.parent.postMessage('SCM.config('+config+')',host);
+	};
+	window.SCMMusicPlayer = SCM;
 
 	init();
-
-	//compatibility
-	window.SCMMusicPlayer = {init: function(config){
-		window.parent.postMessage('SCM.config('+config+')',host);
-	}};
 
 })();
