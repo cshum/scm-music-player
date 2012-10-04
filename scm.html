@@ -93,6 +93,7 @@ require([
 				return false;
 			});
 		});
+		SCM.config = _.once(SCM.config);
 
 		while(SCMQueue.length > 0)
 			(new Function('SCM,Song',SCMQueue.shift()))(SCM,Song);

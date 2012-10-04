@@ -77,11 +77,11 @@
 				interval = setInterval(function(){
 					if(location.hash == hash) return;
 					hash = location.hash;
-					if(hash.indexOf('scm=')>-1)
-						window.scmframe.location.replace(hash.substr(5));
+					if(hash.indexOf('/')>-1)
+						window.scmframe.location.replace(hash.substr(1));
 				},50);
-				if(hash.indexOf('scm=')>-1)
-					location.replace(hash.substr(5));
+				if(hash.indexOf('/')>-1)
+					location.replace(hash.substr(1));
 		},
 		inside = function(){
 			//fix links
@@ -95,7 +95,7 @@
 						window.focus();
 						e.preventDefault();
 					}else if(target.href.indexOf("http://")==0 ){
-						window.top.location.hash = 'scm='+target.href.replace(host,'');
+						window.top.location.hash = target.href.replace(host,'');
 						window.top.scmframe = window;
 						e.preventDefault();
 					}
@@ -128,8 +128,11 @@
 			obj[key] = post(key);
 		}
 		return obj;
-	})('config,queue,play,pause,next,previous,volume,skin,'+
-	'loadPlaylist,changeRepeatMode,toggleShuffle,togglePlaylist');
+	})(
+		'queue,play,pause,next,previous,volume,skin,placement,'+
+		'loadPlaylist,repeatMode,isShuffle,showPlaylist,'+
+		'togglePlaylist,toggleShuffle,changeRepeatMode'
+	);
 
 	init();
 
