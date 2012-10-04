@@ -6,7 +6,7 @@
 		url = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
 		host = url.substr(0,url.indexOf('/',10)),
 		src = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+url,
-		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0;
+		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 
 		addEvent = function(elm, evType, fn) {
 			if(elm.addEventListener) 
