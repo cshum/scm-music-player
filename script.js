@@ -46,17 +46,14 @@
 		},
 
 		code = function(){
-			if(isIE) alert('diu0');
 			var css = 'html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} ';
 			var style = document.createElement('style');
 			style.type = 'text/css';
 			style.id = 'scmcss';
 
-			if(isIE) alert('diu1');
 			if(style.styleSheet) style.styleSheet.cssText = css;
 			else style.appendChild(document.createTextNode(css));
 
-			if(isIE) alert('diu2');
 			head.appendChild(style);
 			/*
 			while(head.firstChild.id!="scmcss")
@@ -72,10 +69,11 @@
 			if(isIE) alert('diu3');
 			document.body.insertBefore(scmframe,document.body.firstChild);
 			
-			addEvent(window,'load',function() {
-				while(document.body.lastChild.id!="scmframe")
-					document.body.removeChild(document.body.lastChild);
-			});
+			if(!isIE)
+				addEvent(window,'load',function() {
+					while(document.body.lastChild.id!="scmframe")
+						document.body.removeChild(document.body.lastChild);
+				});
 		},
 		outside = function(){
 			//fix frame height in IE
