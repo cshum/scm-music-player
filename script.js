@@ -4,8 +4,8 @@
 		current = scripts[scripts.length-1],
 		head = document.getElementsByTagName("head")[0],
 		url = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
-		host = url.substr(0,url.indexOf('/',10)),
 		src = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+url,
+		host = src.substr(0,src.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 
 		addEvent = function(elm, evType, fn) {
