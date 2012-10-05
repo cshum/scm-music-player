@@ -85,8 +85,8 @@
 
 			var hash = location.hash,
 			interval = setInterval(function(){
-				if(location.hash == hash) return;
 			if(isIE) alert('diudiu');
+				if(location.hash == hash) return;
 				hash = location.hash;
 				if(hash.indexOf('/')>-1)
 					window.scmframe.location.replace(hash.substr(1));
