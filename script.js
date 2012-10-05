@@ -94,7 +94,6 @@
 			if(isIE) alert('diu7');
 		},
 		inside = function(){
-			if(isIE) alert('diu8');
 			//fix links
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
@@ -119,13 +118,13 @@
 			//send config
 			if(config)
 				window.parent.postMessage('SCM.config('+config+')',scmHost);
-			if(isIE) alert('diu9');
 		};
 	var hash = location.hash;
 	if(isOutside && hash.indexOf('/')>-1){
 		location.hash = '';
 		location.href = destHost + hash.substr(1);
 	}
+			if(isIE) alert('diu1');
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
@@ -157,6 +156,7 @@
 	};
 	window.SCMMusicPlayer = SCM;
 
+			if(isIE) alert('diu2');
 	init();
 
 })();
