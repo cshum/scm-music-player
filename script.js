@@ -86,16 +86,16 @@
 		inside = function(){
 			//fix links
 			addEvent(document.body,'click',function(e){
-				var target = e.target;
-				if(target.tagName.match(/(A|AREA)/i)){
-					if(target.href.indexOf('https://')==0 || (target.href.indexOf(location.host)==-1 &&
-					target.href.indexOf("http://")==0 ))	{
+				var tar = e.target;
+				if(tar.tagName.match(/(A|AREA)/i)){
+					if(tar.href.indexOf('https://')==0 || (tar.href.indexOf(location.host)==-1 &&
+					tar.href.indexOf("http://")==0 ))	{
 						//external links
-						window.open(target.href,'_blank');
+						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(target.href.indexOf("http://")==0 ){
-						window.top.location.hash = target.href.replace(host,'');
+					}else if(tar.href.indexOf("http://")==0 ){
+						window.top.location.hash = tar.href.replace(host,'');
 						window.top.scmframe = window;
 						e.preventDefault();
 					}
