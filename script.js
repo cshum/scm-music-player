@@ -29,7 +29,7 @@
 
 		init = function(){
 			if(location.hash.indexOf('/')>-1)
-				location.replace(location.hash.substr(1));
+				location.href = location.hash.substr(1);
 			if(!document.body){ 
 				setTimeout(init,10); 
 				return;
