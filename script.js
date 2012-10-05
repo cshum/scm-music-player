@@ -61,14 +61,12 @@
 			scmframe.allowTransparency = true;
 			scmframe.src = scm;
 			
-			if(isIE) alert('diu3');
 			
 			document.body.insertBefore(scmframe,document.body.firstChild);
 			addEvent(window,'load',function() {
 				while(document.body.lastChild.id!="scmframe")
 					document.body.removeChild(document.body.lastChild);
 			});
-			if(isIE) alert('diu4');
 		},
 		outside = function(){
 			//fix frame height in IE
@@ -85,6 +83,7 @@
 					})();
 				});
 
+			if(isIE) alert('diu6');
 			var hash = location.hash,
 			interval = setInterval(function(){
 				if(location.hash == hash) return;
@@ -92,6 +91,7 @@
 				if(hash.indexOf('/')>-1)
 					window.scmframe.location.replace(hash.substr(1));
 			},50);
+			if(isIE) alert('diu7');
 		},
 		inside = function(){
 			if(isIE) alert('diu8');
