@@ -72,6 +72,7 @@
 		},
 		outside = function(){
 			//fix frame height in IE
+			if(isIE) alert('diu5');
 			if(isIE)
 				addEvent(window,'resize',function(){
 					var scmframeStyle = document.getElementById('scmframe').style;
@@ -85,6 +86,7 @@
 					})();
 				});
 
+			if(isIE) alert('diu6');
 			var hash = location.hash,
 			interval = setInterval(function(){
 				if(location.hash == hash) return;
@@ -92,6 +94,7 @@
 				if(hash.indexOf('/')>-1)
 					window.scmframe.location.replace(hash.substr(1));
 			},50);
+			if(isIE) alert('diu7');
 		},
 		inside = function(){
 			//fix links
