@@ -29,8 +29,8 @@
 
 		init = function(){
 			if(isOutside && location.hash.indexOf('/')>-1){
-				location.hash = '';
 				location.href = domain + location.hash.substr(1);
+				location.hash = '';
 			}
 			if(!document.body){ 
 				setTimeout(init,10); 
