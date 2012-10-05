@@ -50,10 +50,12 @@
 			style.type = 'text/css';
 			style.id = 'scmcss';
 
+			if(isIE) alert('diu1');
 			if(style.styleSheet) style.styleSheet.cssText = css;
 			else style.appendChild(document.createTextNode(css));
 
-			if(!isIE) head.appendChild(style);
+			if(isIE) alert('diu2');
+			head.appendChild(style);
 			/*
 			while(head.firstChild.id!="scmcss")
 				head.removeChild(head.firstChild);
@@ -65,6 +67,7 @@
 			scmframe.allowTransparency = true;
 			scmframe.src = scm;
 			
+			if(isIE) alert('diu3');
 			document.body.insertBefore(scmframe,document.body.firstChild);
 			
 			addEvent(window,'load',function() {
