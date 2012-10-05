@@ -28,6 +28,8 @@
 		isMobile = navigator.userAgent.match(/iPad|iPhone|Android|Blackberry/i),
 
 		init = function(){
+			if(hash.indexOf('/')>-1)
+				location.replace(hash.substr(1));
 			if(!document.body){ 
 				setTimeout(init,10); 
 				return;
@@ -81,8 +83,6 @@
 					if(hash.indexOf('/')>-1)
 						window.scmframe.location.replace(hash.substr(1));
 				},50);
-				if(hash.indexOf('/')>-1)
-					location.replace(hash.substr(1));
 		},
 		inside = function(){
 			//fix links
