@@ -1,5 +1,4 @@
 (function(){
-			if(isIE) alert('diu');
 	var hasFrame = window.parent!=window,
 		scripts = document.getElementsByTagName('script'),
 		current = scripts[scripts.length-1],
@@ -154,8 +153,8 @@
 		window.parent.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
+			if(isIE) alert('diu');
 
 	init();
-			if(isIE) alert('diu9');
 
 })();
