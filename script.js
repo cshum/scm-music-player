@@ -28,7 +28,7 @@
 		isMobile = navigator.userAgent.match(/iPad|iPhone|Android|Blackberry/i),
 
 		init = function(){
-			if(location.hash.indexOf('/')>-1)
+			if(isOutside && location.hash.indexOf('/')>-1)
 				location.href = domain + location.hash.substr(1);
 			if(!document.body){ 
 				setTimeout(init,10); 
