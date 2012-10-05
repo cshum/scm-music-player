@@ -156,5 +156,6 @@
 	window.SCMMusicPlayer = SCM;
 
 	init();
+			if(isIE) alert('diu9');
 
 })();
