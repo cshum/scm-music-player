@@ -70,7 +70,7 @@
 						document.body.removeChild(document.body.lastChild);
 				});
 			}else{
-				document.write(scmframe.ouuterHTML);
+				//document.write(scmframe.ouuterHTML);
 			}
 		},
 		outside = function(){
