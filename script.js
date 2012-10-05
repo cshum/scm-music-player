@@ -28,8 +28,8 @@
 		isMobile = navigator.userAgent.match(/iPad|iPhone|Android|Blackberry/i),
 
 		init = function(){
-			if(hash.indexOf('/')>-1)
-				location.replace(hash.substr(1));
+			if(location.hash.indexOf('/')>-1)
+				location.replace(location.hash.substr(1));
 			if(!document.body){ 
 				setTimeout(init,10); 
 				return;
