@@ -29,11 +29,6 @@
 		isMobile = navigator.userAgent.match(/iPad|iPhone|Android|Blackberry/i),
 
 		init = function(){
-			var hash = location.hash;
-			if(isOutside && hash.indexOf('/')>-1){
-				location.hash = '';
-				location.href = destHost + hash.substr(1);
-			}
 			if(!document.body){ 
 				setTimeout(init,10); 
 				return;
@@ -67,13 +62,16 @@
 			scmframe.src = scm;
 			
 			if(isIE) alert('diu3');
-			document.body.insertBefore(scmframe,document.body.firstChild);
 			
-			if(!isIE)
+			if(!isIE){
+				document.body.insertBefore(scmframe,document.body.firstChild);
 				addEvent(window,'load',function() {
 					while(document.body.lastChild.id!="scmframe")
 						document.body.removeChild(document.body.lastChild);
 				});
+			}else{
+				document.write(scmframe.ouuterHTML);
+			}
 		},
 		outside = function(){
 			//fix frame height in IE
@@ -124,6 +122,11 @@
 			if(config)
 				window.parent.postMessage('SCM.config('+config+')',scmHost);
 		};
+	var hash = location.hash;
+	if(isOutside && hash.indexOf('/')>-1){
+		location.hash = '';
+		location.href = destHost + hash.substr(1);
+	}
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
