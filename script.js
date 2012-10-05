@@ -33,6 +33,8 @@
 				location.hash = '';
 				location.href = destHost + hash.substr(1);
 			}
+			if(isOutside)
+				document.write('<style id="scmcss" type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>');
 			if(!document.body){ 
 				setTimeout(init,10); 
 				return;
@@ -45,7 +47,6 @@
 		},
 
 		code = function(){
-			head.innerHTML += '<style id="scmcss" type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>';
 			/*
 			while(head.firstChild.id!="scmcss")
 				head.removeChild(head.firstChild);
