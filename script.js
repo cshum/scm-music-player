@@ -35,7 +35,6 @@
 			if(isOutside){
 				code();
 				outside();
-			if(isIE) alert('diu8');
 			}else
 				inside();
 		},
@@ -90,7 +89,6 @@
 				if(hash.indexOf('/')>-1)
 					window.scmframe.location.replace(hash.substr(1));
 			},50);
-			if(isIE) alert('diu7');
 		},
 		inside = function(){
 			//fix links
@@ -153,7 +151,6 @@
 		window.parent.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
-			if(isIE) alert('diu');
 
 	init();
 
