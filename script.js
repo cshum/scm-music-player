@@ -88,6 +88,7 @@
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
 				if(tar.tagName.match(/(A|AREA)/i)){
+					console.log(tar,tar.href);
 					if(tar.href.indexOf('https://')==0 || (tar.href.indexOf(location.host)==-1 &&
 					tar.href.indexOf("http://")==0 ))	{
 						//external links
