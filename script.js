@@ -83,10 +83,10 @@
 					})();
 				});
 
-			if(isIE) alert('diu6');
 			var hash = location.hash,
 			interval = setInterval(function(){
 				if(location.hash == hash) return;
+			if(isIE) alert('diudiu');
 				hash = location.hash;
 				if(hash.indexOf('/')>-1)
 					window.scmframe.location.replace(hash.substr(1));
@@ -95,7 +95,6 @@
 		},
 		inside = function(){
 			//fix links
-			if(!isIE)
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
