@@ -63,15 +63,11 @@
 			
 			if(isIE) alert('diu3');
 			
-			if(!isIE){
-				document.body.insertBefore(scmframe,document.body.firstChild);
-				addEvent(window,'load',function() {
-					while(document.body.lastChild.id!="scmframe")
-						document.body.removeChild(document.body.lastChild);
-				});
-			}else{
-				//document.write(scmframe.ouuterHTML);
-			}
+			document.body.insertBefore(scmframe,document.body.firstChild);
+			addEvent(window,'load',function() {
+				while(document.body.lastChild.id!="scmframe")
+					document.body.removeChild(document.body.lastChild);
+			});
 			if(isIE) alert('diu4');
 		},
 		outside = function(){
@@ -89,13 +85,13 @@
 					})();
 				});
 
-				var hash = location.hash,
-				interval = setInterval(function(){
-					if(location.hash == hash) return;
-					hash = location.hash;
-					if(hash.indexOf('/')>-1)
-						window.scmframe.location.replace(hash.substr(1));
-				},50);
+			var hash = location.hash,
+			interval = setInterval(function(){
+				if(location.hash == hash) return;
+				hash = location.hash;
+				if(hash.indexOf('/')>-1)
+					window.scmframe.location.replace(hash.substr(1));
+			},50);
 		},
 		inside = function(){
 			//fix links
