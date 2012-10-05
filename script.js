@@ -84,19 +84,18 @@
 				});
 
 			if(isIE) alert('diu6');
-			if(!isIE){
-				var hash = location.hash,
-				interval = setInterval(function(){
-					if(location.hash == hash) return;
-					hash = location.hash;
-					if(hash.indexOf('/')>-1)
-						window.scmframe.location.replace(hash.substr(1));
-				},50);
-			}
+			var hash = location.hash,
+			interval = setInterval(function(){
+				if(location.hash == hash) return;
+				hash = location.hash;
+				if(hash.indexOf('/')>-1)
+					window.scmframe.location.replace(hash.substr(1));
+			},50);
 			if(isIE) alert('diu7');
 		},
 		inside = function(){
 			//fix links
+			if(!isIE)
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
@@ -108,7 +107,7 @@
 						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(!isIE && tar.href.indexOf("http://")==0 ){
+					}else if(tar.href.indexOf("http://")==0 ){
 						window.top.location.hash = tar.href.replace(destHost,'');
 						window.top.scmframe = window;
 						e.preventDefault();
