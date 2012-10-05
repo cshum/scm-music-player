@@ -3,10 +3,10 @@
 		scripts = document.getElementsByTagName('script'),
 		current = scripts[scripts.length-1],
 		head = document.getElementsByTagName("head")[0],
-		url = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
-		domain = url.substr(0,url.indexOf('/',10)),
-		src = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+url,
-		host = src.substr(0,src.indexOf('/',10)),
+		dest = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
+		destHost = dest.substr(0,dest.indexOf('/',10)),
+		scm = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+dest,
+		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 
 		addEvent = function(elm, evType, fn) {
@@ -31,7 +31,7 @@
 			var hash = location.hash;
 			if(isOutside && hash.indexOf('/')>-1){
 				location.hash = '';
-				location.href = domain + hash.substr(1);
+				location.href = destHost + hash.substr(1);
 			}
 			if(!document.body){ 
 				setTimeout(init,10); 
@@ -45,7 +45,7 @@
 		},
 
 		code = function(){
-			head.innerHTML += '<style id="scmcss" type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>';
+			head.innerHTML += '<style id="scmcss" type="text/css"> html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} </style>';
 			/*
 			while(head.firstChild.id!="scmcss")
 				head.removeChild(head.firstChild);
@@ -55,7 +55,7 @@
 			scmframe.frameBorder = 0;
 			scmframe.id = "scmframe";
 			scmframe.allowTransparency = true;
-			scmframe.src = src;
+			scmframe.src = scm;
 			
 			document.body.insertBefore(scmframe,document.body.firstChild);
 			
@@ -101,7 +101,7 @@
 						window.focus();
 						e.preventDefault();
 					}else if(tar.href.indexOf("http://")==0 ){
-						window.top.location.hash = tar.href.replace(domain,'');
+						window.top.location.hash = tar.href.replace(destHost,'');
 						window.top.scmframe = window;
 						e.preventDefault();
 					}
@@ -111,7 +111,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				window.parent.postMessage('SCM.config('+config+')',host);
+				window.parent.postMessage('SCM.config('+config+')',scmHost);
 		};
 
 	if(window.SCM && window.SCMMusicPlayer) return;
@@ -126,7 +126,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					window.parent.postMessage('SCM.'+key+'('+argStr+')',host);
+					window.parent.postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -140,7 +140,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		window.parent.postMessage('SCM.config('+config+')',host);
+		window.parent.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
