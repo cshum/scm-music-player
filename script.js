@@ -84,13 +84,15 @@
 				});
 
 			if(isIE) alert('diu6');
-			var hash = location.hash,
-			interval = setInterval(function(){
-				if(location.hash == hash) return;
-				hash = location.hash;
-				if(hash.indexOf('/')>-1)
-					window.scmframe.location.replace(hash.substr(1));
-			},50);
+			if(!isIE){
+				var hash = location.hash,
+				interval = setInterval(function(){
+					if(location.hash == hash) return;
+					hash = location.hash;
+					if(hash.indexOf('/')>-1)
+						window.scmframe.location.replace(hash.substr(1));
+				},50);
+			}
 			if(isIE) alert('diu7');
 		},
 		inside = function(){
@@ -106,7 +108,7 @@
 						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(tar.href.indexOf("http://")==0 ){
+					}else if(!isIE && tar.href.indexOf("http://")==0 ){
 						window.top.location.hash = tar.href.replace(destHost,'');
 						window.top.scmframe = window;
 						e.preventDefault();
@@ -124,7 +126,6 @@
 		location.hash = '';
 		location.href = destHost + hash.substr(1);
 	}
-			if(isIE) alert('diu1');
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
@@ -156,7 +157,6 @@
 	};
 	window.SCMMusicPlayer = SCM;
 
-			if(isIE) alert('diu2');
 	init();
 
 })();
