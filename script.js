@@ -72,6 +72,7 @@
 			}else{
 				//document.write(scmframe.ouuterHTML);
 			}
+			if(isIE) alert('diu4');
 		},
 		outside = function(){
 			//fix frame height in IE
