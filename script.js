@@ -36,6 +36,7 @@
 			if(isOutside){
 				code();
 				outside();
+			if(isIE) alert('diu8');
 			}else
 				inside();
 		},
@@ -85,7 +86,6 @@
 
 			var hash = location.hash,
 			interval = setInterval(function(){
-			if(isIE) alert('diudiu');
 				if(location.hash == hash) return;
 				hash = location.hash;
 				if(hash.indexOf('/')>-1)
