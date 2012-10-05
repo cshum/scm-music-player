@@ -53,7 +53,7 @@
 			if(style.styleSheet) style.styleSheet.cssText = css;
 			else style.appendChild(document.createTextNode(css));
 
-			head.appendChild(style);
+			if(!isIE) head.appendChild(style);
 			/*
 			while(head.firstChild.id!="scmcss")
 				head.removeChild(head.firstChild);
