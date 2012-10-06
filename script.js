@@ -123,7 +123,7 @@
 		location.hash = '';
 		location.href = destHost + hash.substr(1);
 	}
-	console.log(window.parent);
+	if(!isOutside) console.log(window.parent);
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
