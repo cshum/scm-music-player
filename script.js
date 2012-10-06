@@ -82,11 +82,13 @@
 					})();
 				});
 
+				/*
 			if(history.pushState){
 				addEvent(window,'popstate',function(){
 					window.scmframe.location.replace(location.pathname);
 				});
 			}else{
+		   */
 				var hash = location.hash, first = location.href,
 				interval = setInterval(function(){
 					if(location.hash == hash) return;
@@ -95,7 +97,7 @@
 					if(hash.indexOf('/')>-1)
 						window.scmframe.location.replace(hash.substr(1));
 				},50);
-			}
+			//}
 		},
 		inside = function(){
 			//fix links
@@ -113,11 +115,13 @@
 					}else if(tar.href.indexOf("http://")==0 ){
 						window.top.scmframe = window;
 						var url = tar.href.replace(destHost,'');
+						/*
 						if(history.pushState){
 							window.top.history.pushState(null,null,url);
 						}else{
+					   */
 							window.top.location.hash = tar.href.replace(destHost,'');
-						}
+						//}
 						e.preventDefault();
 					}
 				}
