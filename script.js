@@ -115,7 +115,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				window.parent.postMessage('SCM.config('+config+')','*');
+				window.parent.postMessage('SCM.config('+config+')',scmHost);
 		};
 
 	var hash = location.hash;
@@ -123,6 +123,7 @@
 		location.hash = '';
 		location.href = destHost + hash.substr(1);
 	}
+	console.log(window.parent);
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
@@ -136,7 +137,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					window.parent.postMessage('SCM.'+key+'('+argStr+')','*');
+					window.parent.postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -150,7 +151,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		window.parent.postMessage('SCM.config('+config+')','*');
+		window.parent.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
