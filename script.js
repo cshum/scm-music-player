@@ -69,18 +69,17 @@
 		},
 		outside = function(){
 			//fix frame height in IE
-			if(isIE)
-				addEvent(window,'resize',function(){
-					var scmframeStyle = document.getElementById('scmframe').style;
-					scmframeStyle.height = (function(){
-						if( typeof( window.innerHeight ) == 'number' )
-							return window.innerHeight; 
-						else if( document.documentElement && document.documentElement.clientHeight ) 
-							return document.documentElement.clientHeight; 
-						else if( document.body && document.body.clientHeight ) 
-							return document.body.clientHeight; 
-					})();
-				});
+			addEvent(window,'resize',function(){
+				var scmframeStyle = document.getElementById('scmframe').style;
+				scmframeStyle.height = (function(){
+					if( typeof( window.innerHeight ) == 'number' )
+						return window.innerHeight; 
+					else if( document.documentElement && document.documentElement.clientHeight ) 
+						return document.documentElement.clientHeight; 
+					else if( document.body && document.body.clientHeight ) 
+						return document.body.clientHeight; 
+				})();
+			});
 
 			var hash = location.hash, first = location.href,
 			interval = setInterval(function(){
