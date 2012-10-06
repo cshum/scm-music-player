@@ -9,8 +9,6 @@
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 
-		console.log(scmHost, destHost);
-
 		addEvent = function(elm, evType, fn) {
 			if(elm.addEventListener) 
 				elm.addEventListener(evType, fn);
@@ -119,6 +117,8 @@
 			if(config)
 				window.parent.postMessage('SCM.config('+config+')',scmHost);
 		};
+		console.log(scmHost, destHost);
+
 	var hash = location.hash;
 	if(isOutside && hash.indexOf('/')>-1){
 		location.hash = '';
