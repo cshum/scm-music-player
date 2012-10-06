@@ -82,12 +82,16 @@
 					})();
 				});
 
-			var hash = location.hash,
+			var hash = location.hash, first,
 			interval = setInterval(function(){
 				if(location.hash == hash) return;
 				hash = location.hash;
-				if(hash.indexOf('/')>-1)
+				if(hash.indexOf('/')>-1){
+					if(!first) first = hash;
 					window.scmframe.location.replace(hash.substr(1));
+				}
+				if(hash.length==0 && first)
+					window.scmframe.location.replace(first.substr(1));
 			},50);
 		},
 		inside = function(){
