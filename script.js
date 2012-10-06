@@ -9,6 +9,8 @@
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 
+		console.log(scmHost, destHost);
+
 		addEvent = function(elm, evType, fn) {
 			if(elm.addEventListener) 
 				elm.addEventListener(evType, fn);
