@@ -83,7 +83,7 @@
 				});
 
 			if(history.pushState){
-				addEvent('popstate',function(){
+				addEvent(window,'popstate',function(){
 					window.scmframe.location.replace(location.pathname);
 				});
 			}else{
