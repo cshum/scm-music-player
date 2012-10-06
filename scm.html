@@ -25,6 +25,8 @@ body{overflow:hidden; background:transparent; }
 		bottom:placement()=='top'?'0':'25px', right:showPlaylist()?'202px':'0'}">
 <script type="text/javascript">
 (function(){
+ 	if(window==window.parent)
+		location.href = 'http://scmplayer.net';
 	var addEvent = function(elm, evType, fn) {
 			if(elm.addEventListener) 
 				elm.addEventListener(evType, fn);
