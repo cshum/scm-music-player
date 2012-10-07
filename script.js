@@ -82,8 +82,10 @@
 			});
 			if(history.pushState){
 				addEvent(window,'popstate',function(e){
-					if(e.state == 'scm')
+					console.log(e.state,location.pathname);
+					if(e.state == 'scm'){
 						window.scmframe.location.replace(location.pathname);
+					}
 				});
 			}else{
 				var hash = location.hash, first = location.href,
