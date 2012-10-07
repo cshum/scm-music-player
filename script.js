@@ -8,6 +8,9 @@
 		scm = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+dest,
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
+		frameWindow = function(){
+			return window.top.document.getElementById('scmframe').contentWindow;
+		},
 
 		addEvent = function(elm, evType, fn) {
 			if(elm.addEventListener) 
@@ -32,14 +35,10 @@
 				setTimeout(init,10); 
 				return;
 			}
-			if(isOutside){
-				code();
-				outside();
-			}else
-				inside();
+			if(isOutside) outside(); else inside();
 		},
 
-		code = function(){
+		outside = function(){
 			var css = 'html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} ';
 			var style = document.createElement('style');
 			style.type = 'text/css';
@@ -60,19 +59,16 @@
 			scmframe.allowTransparency = true;
 			scmframe.src = scm;
 			
-			window.scmcontainer = scmframe.contentWindow;
-			
 			document.body.insertBefore(scmframe,document.body.firstChild);
 
 			addEvent(window,'load',function() {
 				while(document.body.lastChild.id!="scmframe")
 					document.body.removeChild(document.body.lastChild);
 			});
-		},
-		outside = function(){
+
 			//fix frame height in IE
 			addEvent(window,'resize',function(){
-				var scmframeStyle = document.getElementById('scmframe').style;
+				var scmframeStyle = scmframe.style;
 				scmframeStyle.height = (function(){
 					if( typeof( window.innerHeight ) == 'number' )
 						return window.innerHeight; 
@@ -157,7 +153,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					window.top.scmcontainer.postMessage('SCM.'+key+'('+argStr+')',scmHost);
+					frameWindow.postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -171,7 +167,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		window.top.scmcontainer.postMessage('SCM.config('+config+')',scmHost);
+		frameWindow.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
