@@ -81,7 +81,7 @@
 				})();
 			});
 			if(history.pushState){
-				addEvent(window,'popstate'function(e){
+				addEvent(window,'popstate',function(e){
 					if(e.state == 'scm')
 						window.scmframe.location.replace(location.pathname);
 				});
