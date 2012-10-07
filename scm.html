@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <style type="text/css">
 body{overflow:hidden; background:transparent; }
-#contentW, #playlistW, #playerW{ position:absolute; }
+#contentW, #playlistW, #playerW{ position:absolute; overflow:hidden;}
 #contentW{z-index:10; top:0; bottom:0; left:0; right:0;}
 #playlistW{ z-index:1; right:0; top:0; bottom:0; width:0; }
 #playerW{z-index:2; left:0; right:0; height:0;}
@@ -89,13 +89,16 @@ require([
 		$("#playerW").html(playerView);
 		$("#playlistW").html(playlistView);
 
-		$('#skin,#contentW,#playerW,#playlistW').each(function(){
-			ko.applyBindings(SCM,this);
-			$(this).mousedown(function(){
-				return false;
+		var config = SCM.config;
+		SCM.config = _.once(function(data){
+			config(data);
+			$('#skin,#contentW,#playerW,#playlistW').each(function(){
+				ko.applyBindings(SCM,this);
+				$(this).mousedown(function(){
+					return false;
+				});
 			});
 		});
-		SCM.config = _.once(SCM.config);
 
 		while(SCMQueue.length > 0)
 			(new Function('SCM,Song',SCMQueue.shift()))(SCM,Song);
