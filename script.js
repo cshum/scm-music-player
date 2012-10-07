@@ -108,7 +108,9 @@
 				var tar = e.target;
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
 					tar = tar.parentNode;
-				if(tar.tagName.match(/^(a|area)$/i)){
+				if(tar.tagName.match(/^(a|area)$/i) && 
+					!tar.getAttribute('imageanchor') //ignore blogger lightbox
+				){
 					if(tar.href.indexOf('https://')==0 || (tar.href.indexOf(location.host)==-1 &&
 					tar.href.indexOf("http://")==0 ))	{
 						//external links
@@ -116,6 +118,7 @@
 						window.focus();
 						e.preventDefault();
 					}else if(tar.href.indexOf("http://")==0 ){
+						//internal link, change address bar href
 						var url = tar.href.replace(destHost,'');
 						window.top.scmframe = window;
 						if(history.pushState){
