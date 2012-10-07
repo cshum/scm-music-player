@@ -82,7 +82,7 @@
 			});
 			if(history.pushState){
 				var getPath = function(){
-						return location.href.replace(destHost,'').replace(/#.*/,'');
+						return location.href.replace(/#.*/,'');
 					},
 					path = getPath(),
 					interval = setInterval(function(){
@@ -119,7 +119,7 @@
 						var url = tar.href.replace(destHost,'');
 						window.top.scmframe = window;
 						if(history.pushState){
-							window.top.history.pushState('scm',null,url);
+							window.top.history.pushState(null,null,url);
 						}else{
 							window.top.location.hash = url;
 						}
