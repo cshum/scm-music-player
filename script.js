@@ -62,14 +62,13 @@
 			document.body.insertBefore(scmframe,document.body.firstChild);
 
 			addEvent(window,'load',function() {
-				while(document.body.lastChild.id!="scmframe")
+				while(document.body.lastChild!=scmframe)
 					document.body.removeChild(document.body.lastChild);
 			});
 
 			//fix frame height in IE
 			addEvent(window,'resize',function(){
-				var scmframeStyle = scmframe.style;
-				scmframeStyle.height = (function(){
+				scmframe.style.height = (function(){
 					if( typeof( window.innerHeight ) == 'number' )
 						return window.innerHeight; 
 					else if( document.documentElement && document.documentElement.clientHeight ) 
@@ -86,7 +85,7 @@
 					interval = setInterval(function(){
 						if(getPath()==path) return;
 						path = getPath();
-						window.scmframe.location.replace(path);
+						window.scminside.location.replace(path);
 					},50);
 			}else{
 				var hash = location.hash, first = location.href,
@@ -95,7 +94,7 @@
 					hash = location.hash;
 					//change page
 					if(hash.indexOf('/')>-1)
-						window.scmframe.location.replace(hash.substr(1));
+						window.scminside.location.replace(hash.substr(1));
 				},50);
 			}
 
@@ -118,7 +117,7 @@
 					}else if(tar.href.indexOf("http://")==0 ){
 						//internal link, change address bar href
 						var url = tar.href.replace(destHost,'');
-						window.top.scmframe = window;
+						window.top.scminside = window;
 						if(history.pushState){
 							window.top.history.pushState(null,null,url);
 						}else{
