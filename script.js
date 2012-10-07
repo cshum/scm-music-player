@@ -132,7 +132,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				window.parent.postMessage('SCM.config('+config+')',scmHost);
+				frameWindow().postMessage('SCM.config('+config+')',scmHost);
 		};
 
 	var hash = location.hash;
@@ -153,7 +153,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					frameWindow.postMessage('SCM.'+key+'('+argStr+')',scmHost);
+					frameWindow().postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -167,7 +167,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		frameWindow.postMessage('SCM.config('+config+')',scmHost);
+		frameWindow().postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
