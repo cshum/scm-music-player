@@ -84,7 +84,7 @@
 				var path = location.pathname,
 					interval = setInterval(function(){
 						if(location.pathname==path) return;
-						path = location.path;
+						path = location.pathname;
 						window.scmframe.location.replace(path);
 					},50);
 			}else{
