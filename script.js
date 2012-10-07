@@ -60,8 +60,10 @@
 			scmframe.allowTransparency = true;
 			scmframe.src = scm;
 			
+			window.scmcontainer = scmframe.contentWindow;
 			
 			document.body.insertBefore(scmframe,document.body.firstChild);
+
 			addEvent(window,'load',function() {
 				while(document.body.lastChild.id!="scmframe")
 					document.body.removeChild(document.body.lastChild);
@@ -155,7 +157,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					window.parent.postMessage('SCM.'+key+'('+argStr+')',scmHost);
+					window.top.scmcontainer.postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -169,7 +171,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		window.parent.postMessage('SCM.config('+config+')',scmHost);
+		window.top.scmcontainer.postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
