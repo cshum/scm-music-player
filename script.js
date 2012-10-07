@@ -81,12 +81,12 @@
 				})();
 			});
 			if(history.pushState){
-				addEvent(window,'popstate',function(e){
-					console.log(e.state,location.pathname);
-					if(e.state == 'scm'){
-						window.scmframe.location.replace(location.pathname);
-					}
-				});
+				var path = location.pathname,
+					interval = setInterval(function(){
+						if(location.pathname==path) return;
+						path = location.path;
+						window.scmframe.location.replace(path);
+					},50);
 			}else{
 				var hash = location.hash, first = location.href,
 				interval = setInterval(function(){
