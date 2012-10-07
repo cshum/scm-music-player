@@ -81,10 +81,10 @@
 				})();
 			});
 			if(history.pushState){
-				var path = location.pathname,
+				var path = location.href.replace(destHost,'').replace(/#.*/,''),
 					interval = setInterval(function(){
 						if(location.pathname==path) return;
-						path = location.pathname;
+						path = location.href.replace(destHost,'').replace(/#.*/,'');
 						window.scmframe.location.replace(path);
 					},50);
 			}else{
