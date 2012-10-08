@@ -32,5 +32,5 @@
  
 #playlist li{ cursor:pointer; }
 #playlist .items{ overflow-x:hidden; overflow-y:auto; height:100%;}
-#playlist .item{ cursor:pointer; padding: 3px 5px; width:500px; }
+#playlist .item{ cursor:pointer; padding: 3px 5px; width:1000px; }
 
