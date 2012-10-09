@@ -106,7 +106,7 @@
 					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
 						if(tar.href.indexOf(location.host
 							.replace(/blogspot.[a-z]*/i,'blogspot')
-						)==-1 && tar.href.match(/^http(s)?:\/\//)==0 )	{
+						)==-1 && tar.href.indexOf("#")!=0)	{
 						//external links
 						window.open(tar.href,'_blank');
 						window.focus();
