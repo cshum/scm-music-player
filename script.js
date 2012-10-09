@@ -77,27 +77,21 @@
 						return document.body.clientHeight; 
 				})();
 			});
-			if(history.pushState){
-				var getPath = function(){
-						return location.href.replace(/#.*/,'');
-					},
-					path = getPath(),
-					interval = setInterval(function(){
-						if(getPath()==path) return;
+			var getPath = function(){
+					return location.href.replace(/#.*/,'');
+				},
+				path = getPath(),
+				hash = location.hash,
+				interval = setInterval(function(){
+					if(getPath()!=path){
 						path = getPath();
 						window.scminside.location.replace(path);
-					},50);
-			}else{
-				var hash = location.hash, first = location.href,
-				interval = setInterval(function(){
-					if(location.hash == hash) return;
-					hash = location.hash;
-					//change page
-					if(hash.indexOf('/')>-1)
-						window.scminside.location.replace(hash.substr(1));
+					}
+					if(location.hash != hash){
+						hash = location.hash;
+						window.scminside.location.hash = hash;
+					}
 				},50);
-			}
-
 		},
 		inside = function(){
 			//fix links
@@ -114,15 +108,11 @@
 						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(tar.href.indexOf("http://")==0 ){
-						//internal link, change address bar href
+					}else if(tar.href.indexOf("http://")==0 && history.pushState){
+						//internal link with pushState, change address bar href
 						var url = tar.href.replace(destHost,'');
 						window.top.scminside = window;
-						if(history.pushState){
-							window.top.history.pushState(null,null,url);
-						}else{
-							window.top.location.hash = url;
-						}
+						window.top.history.pushState(null,null,url);
 						e.preventDefault();
 					}
 				}
