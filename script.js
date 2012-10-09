@@ -8,7 +8,7 @@
 		scm = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+dest,
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
-		frameWindow = function(){
+		insideWindow = function(){
 			return window.top.document.getElementById('scmframe').contentWindow;
 		},
 
@@ -77,6 +77,7 @@
 						return document.body.clientHeight; 
 				})();
 			});
+			//pushState and hash change detection
 			var getPath = function(){
 					return location.href.replace(/#.*/,'');
 				},
@@ -91,9 +92,11 @@
 					hash = location.hash;
 					window.scminside.location.hash = hash;
 				}
-			},50);
+			},100);
 		},
 		inside = function(){
+			//change title
+			window.top.document.title = document.title;
 			//fix links
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
@@ -101,17 +104,23 @@
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
-					if(tar.href.indexOf('https://')==0 || 
-					(tar.href.indexOf(location.host)==-1 && tar.href.indexOf("http://")==0 ))	{
+						if(tar.href.indexOf(location.host
+							.replace(/blogspot.[a-z]*/i,'blogspot')
+						)==-1 && tar.href.match(/^http(s)?:\/\//)==0 )	{
 						//external links
 						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(tar.href.indexOf("http://")==0 && history.pushState){
+					}else if(tar.href.indexOf("#")!=0 && history.pushState){
 						//internal link with pushState, change address bar href
 						var url = tar.href.replace(destHost,'');
 						window.top.scminside = window;
 						window.top.history.pushState(null,null,url);
+						e.preventDefault();
+					}else if(tar.href.indexOf('#')==0){
+						//hash
+						window.top.scminside = window;
+						window.top.location.hash = location.hash;
 						e.preventDefault();
 					}
 				}
@@ -120,7 +129,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				frameWindow().postMessage('SCM.config('+config+')',scmHost);
+				insideWindow().postMessage('SCM.config('+config+')',scmHost);
 		};
 
 	var hash = location.hash;
@@ -141,7 +150,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					frameWindow().postMessage('SCM.'+key+'('+argStr+')',scmHost);
+					insideWindow().postMessage('SCM.'+key+'('+argStr+')',scmHost);
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -155,7 +164,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		frameWindow().postMessage('SCM.config('+config+')',scmHost);
+		insideWindow().postMessage('SCM.config('+config+')',scmHost);
 	};
 	window.SCMMusicPlayer = SCM;
 
