@@ -98,9 +98,9 @@
 			//change title
 			window.top.document.title = document.title;
 			//fix links
-			var filter(host){
-				return host.replace(/blogspot.[a-z]*/i,'blogspot');
-			}
+			var filter = function(host){
+					return host.replace(/blogspot.[a-z]*/i,'blogspot');
+				};
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
