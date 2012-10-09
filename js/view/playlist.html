@@ -3,13 +3,13 @@
 		<h3>Playlist</h3> 
 	</div> 
 	<div class="module" id="playlistContainer">
-		<ol class="items" data-bind="sortable: playlist"> 
+		<ol class="items" data-bind="foreach:playlist"> 
 			<li class="item" data-bind="
 			visible:isValid(),
-			click:$root.play,event:{contextmenu:$root.remove},
+			click:$root.play,
 			css:{focus:on, even:$index()%2==1, odd:$index()%2==0}
 			">
-				<span class="title" data-bind="text:title"></span>&nbsp;
+				<span class="title" data-bind="text:$index()+'. '+title()"></span>&nbsp;
 			</li> 
 		</ol> 
 	</div>
