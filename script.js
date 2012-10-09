@@ -81,17 +81,17 @@
 					return location.href.replace(/#.*/,'');
 				},
 				path = getPath(),
-				hash = location.hash,
-				interval = setInterval(function(){
-					if(getPath()!=path){
-						path = getPath();
-						window.scminside.location.replace(path);
-					}
-					if(location.hash != hash){
-						hash = location.hash;
-						window.scminside.location.hash = hash;
-					}
-				},50);
+				hash = location.hash;
+			setInterval(function(){
+				if(getPath()!=path){
+					path = getPath();
+					window.scminside.location.replace(path);
+				}
+				if(location.hash != hash){
+					hash = location.hash;
+					window.scminside.location.hash = hash;
+				}
+			},50);
 		},
 		inside = function(){
 			//fix links
@@ -100,10 +100,9 @@
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
-					!tar.getAttribute('imageanchor') //ignore blogger lightbox
-				){
-					if(tar.href.indexOf('https://')==0 || (tar.href.indexOf(location.host)==-1 &&
-					tar.href.indexOf("http://")==0 ))	{
+					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
+					if(tar.href.indexOf('https://')==0 || 
+					(tar.href.indexOf(location.host)==-1 && tar.href.indexOf("http://")==0 ))	{
 						//external links
 						window.open(tar.href,'_blank');
 						window.focus();
