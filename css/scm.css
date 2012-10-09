@@ -31,6 +31,10 @@
 #playlist h3{ border-bottom:1px solid; font-weight:bold; padding: 3px 5px;}
  
 #playlist li{ cursor:pointer; }
-#playlist .items{ overflow-x:hidden; overflow-y:auto; height:100%;}
+#playlist .items{ 
+	overflow-x:hidden; overflow-y:auto; height:100%; 
+	list-style-type:decimal;
+	list-style-position: inside;
+}
 #playlist .item{ cursor:pointer; padding: 3px 5px; width:1000px; }
 
