@@ -107,22 +107,25 @@
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.href.match(/.(jpg|png)$/i)){ //ignore picture link
-					if(filter(tar.href).indexOf(filter(location.host))==-1 && 
-						tar.href.indexOf("#")!=0)	{
+					if(tar.href.indexOf('#')==0){
+						//hash
+						window.top.scminside = window;
+						window.top.location.hash = location.hash;
+						e.preventDefault();
+					}else if(tar.title.match(/^SCM:/)){
+						var title = tar.title.replace(/^SCM:/,'');
+						var url = tar.href;
+						SCM.play({title:title,url:url});
+					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
 						//external links
 						window.open(tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(tar.href.indexOf("#")!=0 && history.pushState){
+					}else if(history.pushState){
 						//internal link with pushState, change address bar href
 						var url = filter(tar.href).replace(filter(destHost),'');
 						window.top.scminside = window;
 						window.top.history.pushState(null,null,url);
-						e.preventDefault();
-					}else if(tar.href.indexOf('#')==0){
-						//hash
-						window.top.scminside = window;
-						window.top.location.hash = location.hash;
 						e.preventDefault();
 					}
 				}
