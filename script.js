@@ -107,7 +107,8 @@
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
-						if(tar.href.indexOf(filter(location.host))==-1 && tar.href.indexOf("#")!=0)	{
+					if(filter(tar.href).indexOf(filter(location.host))==-1 && 
+						tar.href.indexOf("#")!=0)	{
 						//external links
 						window.open(tar.href,'_blank');
 						window.focus();
