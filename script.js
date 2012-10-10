@@ -116,6 +116,7 @@
 						var title = tar.title.replace(/^SCM:/,'');
 						var url = tar.href;
 						SCM.play({title:title,url:url});
+						e.preventDefault();
 					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
 						//external links
 						window.open(tar.href,'_blank');
