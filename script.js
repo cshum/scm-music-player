@@ -39,7 +39,7 @@
 		},
 
 		outside = function(){
-			var css = 'html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:167;} ';
+			var css = 'html,body{overflow:hidden;} body{margin:0;padding:0;border:0;} img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer{ display:none;border:0;margin:0;padding:0; } #scmframe{display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:1667;} ';
 			var style = document.createElement('style');
 			style.type = 'text/css';
 			style.id = 'scmcss';
@@ -106,7 +106,7 @@
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
-					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
+					!tar.href.match(/.(jpg|png)$/i)){ //ignore picture link
 					if(filter(tar.href).indexOf(filter(location.host))==-1 && 
 						tar.href.indexOf("#")!=0)	{
 						//external links
