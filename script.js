@@ -113,7 +113,7 @@
 						window.top.location.hash = location.hash;
 						e.preventDefault();
 					}else if(tar.title.match(/^SCM:/)){
-						var title = tar.title.replace(/^SCM:/,'');
+						var title = tar.title.replace(/^SCM:()?/,'');
 						var url = tar.href;
 						SCM.play({title:title,url:url});
 						e.preventDefault();
