@@ -98,13 +98,16 @@
 			//change title
 			window.top.document.title = document.title;
 			//fix links
+			var filter = function(host){
+					return host.replace(/blogspot.[a-z.]*/i,'blogspot.com');
+				};
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.getAttribute('imageanchor')){ //ignore blogger lightbox
-					if(tar.href.indexOf(location.host)==-1 && 
+					if(filter(tar.href).indexOf(filter(location.host))==-1 && 
 						tar.href.indexOf("#")!=0)	{
 						//external links
 						window.open(tar.href,'_blank');
@@ -112,7 +115,7 @@
 						e.preventDefault();
 					}else if(tar.href.indexOf("#")!=0 && history.pushState){
 						//internal link with pushState, change address bar href
-						var url = tar.href.replace(destHost,'');
+						var url = filter(tar.href).replace(filter(destHost),'');
 						window.top.scminside = window;
 						window.top.history.pushState(null,null,url);
 						e.preventDefault();
