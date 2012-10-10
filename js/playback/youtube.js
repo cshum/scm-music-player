@@ -75,7 +75,7 @@ define([
 			case 101: msg += ': Cannot be played in embedded player'; break;
 			case 100: msg += ': Request not Found'; break;
 		}
-		SCM.message(msg);
+		if(e.data!=5) SCM.message(msg);
 	}
 	function parseVideoId(url){
 		var prefix = '(v=|/v/|youtu.be/)';
