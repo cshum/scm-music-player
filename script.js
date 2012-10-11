@@ -176,6 +176,6 @@
 	};
 	window.SCMMusicPlayer = SCM;
 
-	init();
+	if(!isMobile) init();
 
 })();
