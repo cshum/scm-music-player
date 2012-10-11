@@ -8,8 +8,9 @@
 		scm = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+dest,
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
-		postMessage = function(msg,host){
-			return window.top.document.getElementById('scmframe').contentWindow.postMessage(msg,host);
+		postMessage = function(msg){
+			return window.top.document.getElementById('scmframe')
+				.contentWindow.postMessage(msg,scmHost);
 		},
 
 		addEvent = function(elm, evType, fn) {
@@ -135,7 +136,7 @@
 			var config = current.getAttribute('data-config');
 			//send config
 			if(config)
-				postMessage('SCM.config('+config+')',scmHost);
+				postMessage('SCM.config('+config+')');
 		};
 
 	var hash = location.hash;
@@ -156,7 +157,7 @@
 					if(typeof(arg)!='undefined')
 						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
 							JSON.stringify(arg)+')';
-					postMessage('SCM.'+key+'('+argStr+')',scmHost);
+					postMessage('SCM.'+key+'('+argStr+')');
 				}
 			};
 		for(var i=0;i<keys.length;i++){
@@ -170,7 +171,7 @@
 		'togglePlaylist,toggleShuffle,changeRepeatMode'
 	);
 	SCM.init = function(config){
-		postMessage('SCM.config('+config+')',scmHost);
+		postMessage('SCM.config('+config+')');
 	};
 	window.SCMMusicPlayer = SCM;
 
