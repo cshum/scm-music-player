@@ -120,6 +120,7 @@
 						SCM.play({title:title,url:url});
 						e.preventDefault();
 					}else if(tar.href.match(/\.css$/)){
+						//auto add skin
 						window.open('http://scmplayer.net/#skin='+tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
