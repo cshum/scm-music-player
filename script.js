@@ -135,7 +135,6 @@
 			});
 			
 			var config = current.getAttribute('data-config');
-			console.
 			//send config
 			if(config)
 				postMessage('SCM.config('+config+')');
