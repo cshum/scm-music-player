@@ -25,7 +25,17 @@ var	playback = null,
 
 	playlist = ko.observableArray(),
 	autoPlay = ko.observable(false),
-	queue = playlist.push,
+	queue = function(song){
+		var matches = _(playlist()).filter(function(el){
+			return el.url() == song.url();
+		});
+		if(matches.length>0) 
+			return matches[0];
+		else{
+			playlist.push(song);
+			return song;
+		}
+	},
 	loadPlaylist = (function(){
 		var list = _.map(module.config().playlist,function(val,idx){
 			return {name:idx,regexp:new RegExp(val)};
@@ -89,7 +99,7 @@ var	playback = null,
 		});
 		return function(){
 			if(!isDirty) return list;
-			list = shuffle(_.clone(filteredList()));
+			list = _.shuffle(filteredList());
 			isDirty = false;
 			return list;
 		}
@@ -117,11 +127,8 @@ var	playback = null,
 
 	pause = _.bind(isPlay,this,false),
 	play = function(song){
-		if(song instanceof Song){ 
-			if(!_.contains(playlist(),song)) 
-				playlist.push(song);
-			current(song); 
-		}
+		if(song instanceof Song)
+			current(queue(song));
 		isPlay(true);
 	},
 	remove = function(song){
