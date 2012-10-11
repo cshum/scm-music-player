@@ -114,7 +114,8 @@
 						window.top.location.hash = location.hash;
 						e.preventDefault();
 					}else if(tar.title.match(/^SCM:/i)){
-						var title = tar.title.replace(/^SCM:()?/i,'');
+						//SCM Play link
+						var title = tar.title.replace(/^SCM:( )?/i,'');
 						var url = tar.href;
 						SCM.play({title:title,url:url});
 						e.preventDefault();
