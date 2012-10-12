@@ -5,7 +5,7 @@
 		head = document.getElementsByTagName("head")[0],
 		dest = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
 		destHost = dest.substr(0,dest.indexOf('/',10)),
-		scm = current.getAttribute('src').replace(/script\.js/g,'scm.html')+'#'+dest,
+		scm = current.getAttribute('src').replace(/script\.js.*/g,'scm.html')+'#'+dest,
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 		postMessage = function(msg){
