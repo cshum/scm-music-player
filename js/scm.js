@@ -8,9 +8,7 @@ var	playback = null,
 		var empty = new Song({title:""}),
 			song = ko.observable(empty);
 		return ko.computed({
-			read: function(){
-				return song();
-			},
+			read: song,
 			write: function(value){
 				//empty as placeholder
 				song().on(false);
@@ -108,18 +106,13 @@ var	playback = null,
 	message = ko.observable(null),
 
 	isPlay = (function(){
-		var isPlay= ko.observable(0);
-		return ko.computed({
-			read: function(){
-				return isPlay();
-			},
-			write:function(value){
-				isPlay(value);
-				//if current empty find stuff to play
-				if(value && !current().isValid()) 
-					next();
-			}
+		var isPlay = ko.observable(false);
+		isPlay.subscribe(function(value){
+			//if current empty find stuff to play
+			if(value && !current().isValid()) 
+				next();
 		});
+		return isPlay;
 	})(),
 	isShuffle = ko.observable(false),
 	volume = ko.observable(50),
