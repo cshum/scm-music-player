@@ -110,5 +110,6 @@ define(['knockout','jquery','underscore'],function(ko,$){
 			update();
 		}
 	}
+	return ko;
 });
 
