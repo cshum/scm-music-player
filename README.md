@@ -9,6 +9,6 @@ SCM Music Player is a free and open source web music player that brings a seamle
 * __Flexible UI__ - Dockable player on top or bottom. Playlist can be toggled.
 * __Setup Wizard__ - Create your SCM Music Player without any pain.
 
-This is the Github repository for SCM Music Player. You can clone source to your server. Run index.html and you will be redirected to the Setup Wizard configured for your self hosted SCM Music Player.
+This is the Github repository for SCM Music Player, and you can clone source to your server. Run index.html and you will be redirected to the Setup Wizard configured for your self hosted SCM Music Player.
 
 For more information please visit http://scmplayer.net.
