@@ -55,7 +55,7 @@ var	playback = null,
 			if(_.isString(data))
 				require(['playlist/'+getModuleName(data)+'!'+data],done);
 			else if(_.isArray(data))
-				done(_.map(data,function(item){
+				done(_(data).map(function(item){
 					return new Song({
 						title:unescape(item.title), 
 						url:unescape(item.url)
@@ -70,7 +70,7 @@ var	playback = null,
 		});
 		return function(){
 			if(!isDirty) return list;
-			list = _.filter(playlist(),function(song){
+			list = _(playlist()).filter(function(song){
 				return song.isValid();
 			});
 			isDirty = false;
@@ -118,15 +118,13 @@ var	playback = null,
 	volume = ko.observable(50),
 	repeatMode = ko.observable(1), //0 none, 1 all, 2 one
 
-	pause = _.bind(isPlay,this,false),
+	pause = _(isPlay).bind(null,false),
 	play = function(song){
 		if(song instanceof Song)
 			current(queue(song));
 		isPlay(true);
 	},
-	remove = function(song){
-		playlist.remove(song);
-	},
+	remove = _(playlist.remove).bind(playlist),
 
 	changeRepeatMode = function(){
 		repeatMode((repeatMode()+1) % 3);
@@ -196,8 +194,8 @@ var	playback = null,
 		else current(list[(i + len) % len]); 
 	},
 
-	next = _.bind(change,this,1),
-	previous = _.bind(change,this,-1),
+	next = _(change).bind(null,1),
+	previous = _(change).bind(null,-1),
 
 	finish = function(){
 		//repeat one start again, otherwise next song
