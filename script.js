@@ -157,9 +157,7 @@
 			}
 		},
 		postConfig = function(config){
-			if(!isOutside) return;
 			postMessage('SCM.config('+config+')');
-			setTimeout(postConfig,1000,config);
 		};
 
 	//SCM interface
