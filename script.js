@@ -10,8 +10,28 @@
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 		postMessage = function(msg){
-			return window.top.document.getElementById('scmframe')
-				.contentWindow.postMessage(msg,scmHost);
+			if(!isOutside)
+				return window.top.document.getElementById('scmframe')
+					.contentWindow.postMessage(msg,scmHost);
+		},
+		postFactory = function(obj,keys){
+			var keys = keys.split(','),
+				post = function(key){
+					return function(arg){
+						var argStr = '';
+						if(typeof(arg)!='undefined')
+							argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
+								JSON.stringify(arg)+')';
+						postMessage('SCM.'+key+'('+argStr+')');
+					}
+				};
+			for(var i=0;i<keys.length;i++){
+				var key = keys[i];
+				obj[key] = post(key);
+			}
+		},
+		postConfig = function(config){
+			postMessage('SCM.config('+config+')');
 		},
 
 		addEvent = function(elm, evType, fn) {
@@ -139,27 +159,6 @@
 					}
 				}
 			});
-			//send config
-			if(config) postConfig(config);
-		},
-		postFactory = function(obj,keys){
-			var keys = keys.split(','),
-				post = function(key){
-					return function(arg){
-						var argStr = '';
-						if(typeof(arg)!='undefined')
-							argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
-								JSON.stringify(arg)+')';
-						postMessage('SCM.'+key+'('+argStr+')');
-					}
-				};
-			for(var i=0;i<keys.length;i++){
-				var key = keys[i];
-				obj[key] = post(key);
-			}
-		},
-		postConfig = function(config){
-			postMessage('SCM.config('+config+')');
 		};
 
 	//SCM interface
@@ -170,12 +169,14 @@
 		'loadPlaylist,repeatMode,isShuffle,showPlaylist,'+
 		'togglePlaylist,toggleShuffle,changeRepeatMode');
 
-	SCM.init = postConfig;
-
 	if(window.SCM && window.SCMMusicPlayer) return;
 
-	window.SCMMusicPlayer = SCM;
-	window.SCM = SCM;
-
 	if(!isMobile) init();
+
+	//send config
+	if(config) postConfig(config);
+	SCM.init = postConfig;
+
+	window.SCMMusicPlayer = window.SCMMusicPlayer || SCM;
+	window.SCM = window.SCM || SCM;
 })();
