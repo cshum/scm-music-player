@@ -139,48 +139,49 @@
 				}
 			});
 			
-			var config = current.getAttribute('data-config');
-			//send config
-			if(config)
-				postMessage('SCM.config('+config+')');
+
+		},
+		postFactory = function(obj,keys){
+			var keys = keys.split(','),
+				post = function(key){
+					return function(arg){
+						var argStr = '';
+						if(typeof(arg)!='undefined')
+							argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
+								JSON.stringify(arg)+')';
+						postMessage('SCM.'+key+'('+argStr+')');
+					}
+				};
+			for(var i=0;i<keys.length;i++){
+				var key = keys[i];
+				obj[key] = post(key);
+			}
+		},
+		postConfig = function(config){
+			if(!isOutside) return;
+			postMessage('SCM.config('+config+')');
+			setTimeout(postConfig,1000);
 		};
 
-	var hash = location.hash;
-	if(isOutside && hash.indexOf('/')>-1){
-		location.hash = '';
-		location.href = destHost + hash.substr(1);
-	}
+	//SCM interface
+	var SCM = {};
+
+	postFactory(SCM,
+		'queue,play,pause,next,previous,volume,skin,placement,'+
+		'loadPlaylist,repeatMode,isShuffle,showPlaylist,'+
+		'togglePlaylist,toggleShuffle,changeRepeatMode');
+
+	SCM.init = postConfig;
 
 	if(window.SCM && window.SCMMusicPlayer) return;
 
-	//SCM interface
-	window.SCM = (function(keys){
-		var keys = keys.split(','),
-			obj = {},
-			post = function(key){
-				return function(arg){
-					var argStr = '';
-					if(typeof(arg)!='undefined')
-						argStr = (key.match(/(play|queue)/) ? 'new Song(':'(') +
-							JSON.stringify(arg)+')';
-					postMessage('SCM.'+key+'('+argStr+')');
-				}
-			};
-		for(var i=0;i<keys.length;i++){
-			var key = keys[i];
-			obj[key] = post(key);
-		}
-		return obj;
-	})(
-		'queue,play,pause,next,previous,volume,skin,placement,'+
-		'loadPlaylist,repeatMode,isShuffle,showPlaylist,'+
-		'togglePlaylist,toggleShuffle,changeRepeatMode'
-	);
-	SCM.init = function(config){
-		postMessage('SCM.config('+config+')');
-	};
 	window.SCMMusicPlayer = SCM;
+	window.SCM = SCM;
 
 	if(!isMobile) init();
+
+	//send config
+	var config = current.getAttribute('data-config');
+	if(config) postConfig(config);
 
 })();
