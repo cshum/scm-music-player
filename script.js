@@ -84,8 +84,12 @@
 			document.body.insertBefore(scmframe,document.body.firstChild);
 
 			addEvent(window,'load',function() {
-				while(document.body.lastChild!=scmframe)
-					document.body.removeChild(document.body.lastChild);
+				setTimeout(function(){
+					while(document.body.firstChild!=scmframe)
+						document.body.removeChild(document.body.firstChild);
+					while(document.body.lastChild!=scmframe)
+						document.body.removeChild(document.body.lastChild);
+				},0);
 			});
 
 			//fix frame height in IE
