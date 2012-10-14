@@ -139,6 +139,8 @@
 					}
 				}
 			});
+			//send config
+			if(config) postConfig(config);
 		},
 		postFactory = function(obj,keys){
 			var keys = keys.split(','),
@@ -176,8 +178,4 @@
 	window.SCM = SCM;
 
 	if(!isMobile) init();
-
-	//send config
-	if(config) postConfig(config);
-
 })();
