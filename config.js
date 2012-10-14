@@ -37,7 +37,7 @@ var requirejs = ({
 			url:'swf/',
 		}
 	},
-	waitSeconds: 90,
+	waitSeconds: 900,
 	baseUrl: 'js/'
 });
 
