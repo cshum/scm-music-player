@@ -52,6 +52,7 @@ body{overflow:hidden; background:transparent; }
 	window.SCMQueue = [];
 	addEvent(window,'message',function(e){
 		var data = e.data;
+		if(console) console.log('SCM receive message',data);
 		if(data.indexOf('SCM')!=0) 
 			return;
 		if(window.SCM && window.Song)
