@@ -35,18 +35,7 @@ body{overflow:hidden; background:transparent; }
 			else
 				elm['on' + evType] = fn;
 		},
-		fixURL = function(url){
-			if(url=='') return 'about:blank';
-			var dummy="scmmusicplayer=adrianshum";
-			if(url.indexOf('?')>0)
-				url=url.replace('?','?'+dummy+'&amp;');
-			else if(url.indexOf('#')>0)
-				url=url.replace('#','?'+dummy+'#');
-			else
-				url+='?'+dummy;
-			return url;
-		},
-		url = fixURL(location.hash.substr(1)),
+		url = location.hash.substr(1),
 		host = url.substr(0,url.indexOf('/',10));
 
 	window.SCMQueue = [];
@@ -59,7 +48,7 @@ body{overflow:hidden; background:transparent; }
 		else
 			SCMQueue.push(data);
 	});
-	document.write('<iframe src="'+url+'" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
+	document.write('<iframe src="javascript:location.replace(\''+url+'\');" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
 })();
 </script>
 </div>
