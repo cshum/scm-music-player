@@ -2,6 +2,7 @@
 	var hasFrame = window.parent!=window,
 		scripts = document.getElementsByTagName('script'),
 		current = scripts[scripts.length-1],
+		config = current.getAttribute('data-config'),
 		head = document.getElementsByTagName("head")[0],
 		dest = location.href.replace(/scmplayer\=true/g, 'scmplayer=false'),
 		destHost = dest.substr(0,dest.indexOf('/',10)),
@@ -160,7 +161,7 @@
 		postConfig = function(config){
 			if(!isOutside) return;
 			postMessage('SCM.config('+config+')');
-			setTimeout(postConfig,1000);
+			setTimeout(postConfig,1000,config);
 		};
 
 	//SCM interface
@@ -181,7 +182,6 @@
 	if(!isMobile) init();
 
 	//send config
-	var config = current.getAttribute('data-config');
 	if(config) postConfig(config);
 
 })();
