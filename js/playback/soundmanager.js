@@ -6,7 +6,6 @@ define(['scm','module','jquery'],function(SCM,module,$){
 		soundManager.setup({
 			url:config.url,
 			useHTML5Audio:true,
-			preferFlash:false,
 			allowScriptAccess: 'always',
 			onready:function(){
 				callback({on:on, off:off});
