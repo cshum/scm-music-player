@@ -137,9 +137,11 @@
 				){ 
 					if(tar.href.indexOf('#')==0){
 						//hash
-						window.top.scminside = window;
-						window.top.location.hash = location.hash;
-						e.preventDefault();
+						if(tar.href != "#"){
+							window.top.scminside = window;
+							window.top.location.hash = location.hash;
+							e.preventDefault();
+						}
 					}else if(tar.title.match(/^(SCM:|\[SCM\])/i)){
 						//SCM Play link
 						var title = tar.title.replace(/^(SCM:|\[SCM\])( )?/i,'');
