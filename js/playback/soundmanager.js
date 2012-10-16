@@ -1,19 +1,17 @@
-define(['scm','module','jquery',
-'text!lib/soundmanager/soundmanager2-nodebug-jsmin.js'],
-function(SCM,module,$,script){
-	var config = module.config(),
-	callback, sound, playObserve, volumeObserve, positionObserve;
+define(['scm','jquery'],function(SCM,$){
+	var callback, sound, playObserve, volumeObserve, positionObserve;
 
-	eval(script);
-
-	soundManager.setup({
-		url:'swf/',
-		useHTML5Audio:true,
-		preferFlash:false,
-		allowScriptAccess: 'always',
-		onready:function(){
-			callback({on:on, off:off});
-		}
+	$.getScript('js/lib/soundmanager/soundmanager2.js',function(){
+		soundManager.setup({
+			url:'swf/',
+			useHTML5Audio:true,
+			preferFlash:false,
+			debugMode:true,
+			allowScriptAccess: 'always',
+			onready:function(){
+				callback({on:on, off:off});
+			}
+		});
 	});
 
 	function on(url,finishCallback){
