@@ -1,17 +1,15 @@
 define(['scm','jquery'],function(SCM,$){
 	var callback, sound, playObserve, volumeObserve, positionObserve;
 
-	$.getScript('js/lib/soundmanager/soundmanager2.js',function(){
-		soundManager.setup({
-			url:'swf/',
-			useHTML5Audio:true,
-			preferFlash:false,
-			debugMode:true,
-			allowScriptAccess: 'always',
-			onready:function(){
-				callback({on:on, off:off});
-			}
-		});
+	soundManager.setup({
+		url:'swf/',
+		useHTML5Audio:true,
+		preferFlash:false,
+		flashVersion: 9,
+		allowScriptAccess: 'always',
+		onready:function(){
+			callback({on:on, off:off});
+		}
 	});
 
 	function on(url,finishCallback){
