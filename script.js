@@ -154,12 +154,15 @@
 						window.focus();
 						e.preventDefault();
 					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
-						//external links
-						window.open(tar.href,'_blank');
-						window.focus();
-						e.preventDefault();
+						if(tar.href.match(/^http(s)?/)){
+							//external links
+							window.open(tar.href,'_blank');
+							window.focus();
+							e.preventDefault();
+						}
 					}else if(history.pushState){
-						//internal link with pushState, change address bar href
+						//internal link & has pushState
+						//change address bar href
 						var url = filter(tar.href).replace(filter(destHost),'');
 						window.top.scminside = window;
 						window.top.history.pushState(null,null,url);
