@@ -133,7 +133,7 @@
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.href.match(/.(jpg|png)$/i) && //ignore picture link
-					!tar.href.match(/^javascript:/) && //ignore javascript link
+					!tar.href.match(/^javascript:/) //ignore javascript link
 				){ 
 					if(tar.href.indexOf('#')==0){
 						//hash
