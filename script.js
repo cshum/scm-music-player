@@ -163,6 +163,10 @@
 					}
 				}
 			});
+
+			addEvent(window,'load',function() {
+			});
+
 		};
 
 	//SCM interface
