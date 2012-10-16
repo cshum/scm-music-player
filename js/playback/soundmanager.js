@@ -1,18 +1,5 @@
-define(['scm','module','jquery'],function(SCM,module,$){
-	var config = module.config(),
-	callback, sound, playObserve, volumeObserve, positionObserve;
-
-	$.getScript(config.script,function(){
-		soundManager.setup({
-			url:config.url,
-			useHTML5Audio:true,
-			preferFlash:false,
-			allowScriptAccess: 'always',
-			onready:function(){
-				callback({on:on, off:off});
-			}
-		});
-	});
+define(['scm','jquery'],function(SCM,$){
+	var sound, playObserve, volumeObserve, positionObserve;
 
 	function on(url,finishCallback){
 		sound = soundManager.createSound({
@@ -62,8 +49,12 @@ define(['scm','module','jquery'],function(SCM,module,$){
 	}
 
 	return {
-		load:function(name, req, onLoad, config){
-			callback = onLoad;
+		load:function(name, req, callback, config){
+			soundManager.setup({
+				onready:function(){
+					callback({on:on, off:off});
+				}
+			});
 		}
 	};
 });

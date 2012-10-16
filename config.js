@@ -11,13 +11,6 @@ var requirejs = ({
 		'underscore': 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.1/underscore-min',
 		'knockout':'http://cdnjs.cloudflare.com/ajax/libs/knockout/2.1.0/knockout-min',
 
-		/*
-		'jquery': 'lib/jquery/jquery-1.8.2.min',
-		'jquery.ui': 'lib/jquery/jquery-ui.min',
-		'underscore': 'lib/underscore/underscore',
-		'knockout':'lib/knockout/knockout-2.1.0',
-	   */
-
 		'text': 'lib/require/text',
 		'domready': 'lib/require/domready'
 	},
@@ -31,13 +24,13 @@ var requirejs = ({
 				'youtube':'(youtube.com|youtu.be)',
 				'rss':'.*'
 			}
-		},
-		'playback/soundmanager':{
-			script:'js/lib/soundmanager/soundmanager2-nodebug-jsmin.js',
-			url:'swf/',
 		}
 	},
 	waitSeconds: 900,
 	baseUrl: 'js/'
 });
 
+soundManager.preferFlash = false;
+soundManager.useHTML5Audio = true;
+soundManager.url = 'swf/';
+soundManager.allowScriptAccess = 'always';
