@@ -30,3 +30,7 @@ var requirejs = ({
 	baseUrl: 'js/'
 });
 
+soundManager.preferFlash = false;
+soundManager.useHTML5Audio = true;
+soundManager.url = 'swf/';
+soundManager.allowScriptAccess = 'always';
