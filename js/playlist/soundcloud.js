@@ -8,7 +8,8 @@ define(['jquery','song'],function($,Song){
 					done(data.tracks,callback);
 				}else if($.isArray(data)){
 					done(data, callback);
-				}else{
+				}else if(data.creator || data.username){
+					//if user or group load tracks
 					load(data.uri+'/tracks',callback);
 				}
 			});
