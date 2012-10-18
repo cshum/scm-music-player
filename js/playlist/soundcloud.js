@@ -1,21 +1,33 @@
 define(['jquery','song'],function($,Song){
-	var consumer_key = "89e7642d86f9241b0d1917ebfae99e38";
+	var consumer_key = "89e7642d86f9241b0d1917ebfae99e38",
+		load = function(url,callback){
+			url += url.match(/[a-z]*\?/i) ? '&':'?';
+			url += 'consumer_key=' + consumer_key+'&format=json&callback=?';
+			$.getJSON(url, function(data){
+				if(data.tracks){
+					done(data.tracks,callback);
+				}else if($.isArray(data)){
+					done(data, callback);
+				}else{
+					load(data.uri+'/tracks',callback);
+				}
+			});
+		},
+		done = function(data,callback){
+			callback($.map(data,function(track){
+				var url = track.stream_url;
+				url += url.match(/[a-z]*\?/i) ? '&':'?';
+				url += 'consumer_key=' + consumer_key;
+				return new Song({
+					title:track.title,
+					url:url
+				});
+			}));
+		};
 
 	return {
 		load:function(url, req, callback, config){
-			var resolveURL = 'http://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' 
-				+ consumer_key + '&callback=?';
-			$.getJSON(resolveURL, function(data){
-				callback($.map(data.tracks,function(track){
-					var url = track.stream_url;
-					url = (url.indexOf("secret_token") == -1) ? url + '?' : url + '&';
-					url += 'consumer_key=' + consumer_key;
-					return new Song({
-						title:track.title,
-						url:url
-					});
-				}));
-			});
+			load('http://api.soundcloud.com/resolve?url=' + url,callback);
 		}
 	}
 });

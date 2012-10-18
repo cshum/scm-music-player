@@ -18,12 +18,12 @@ var requirejs = ({
 		'scm':{
 			playback:{
 				'youtube':'(youtube.com|youtu.be)',
-				'soundcloud':'^http\:\/\/soundcloud.com',
+				'soundcloud':'^http(s)?\:\/\/soundcloud.com',
 				'soundmanager':'.*'
 			},
 			playlist:{
 				'youtube':'(youtube.com|youtu.be)',
-				'soundcloud':'^http\:\/\/soundcloud.com',
+				'soundcloud':'^http(s)?\:\/\/soundcloud.com',
 				'rss':'.*'
 			}
 		}
