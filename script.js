@@ -10,9 +10,8 @@
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 		postMessage = function(msg){
-			if(!isOutside)
-				return window.top.document.getElementById('scmframe')
-					.contentWindow.postMessage(msg,scmHost);
+			return window.top.document.getElementById('scmframe')
+				.contentWindow.postMessage(msg,scmHost);
 		},
 		postFactory = function(obj,keys){
 			var keys = keys.split(','),
@@ -31,6 +30,7 @@
 			}
 		},
 		postConfig = function(config){
+			if(!isOutside)
 			postMessage('SCM.config('+config+')');
 		},
 
