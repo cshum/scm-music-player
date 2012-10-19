@@ -10,9 +10,8 @@
 		scmHost = scm.substr(0,scm.indexOf('/',10)),
 		isOutside = !hasFrame || location.href.indexOf("scmplayer=true")>0,
 		postMessage = function(msg){
-			if(!isOutside)
-				return window.top.document.getElementById('scmframe')
-					.contentWindow.postMessage(msg,scmHost);
+			return window.top.document.getElementById('scmframe')
+				.contentWindow.postMessage(msg,scmHost);
 		},
 		postFactory = function(obj,keys){
 			var keys = keys.split(','),
@@ -31,6 +30,7 @@
 			}
 		},
 		postConfig = function(config){
+			if(!isOutside)
 			postMessage('SCM.config('+config+')');
 		},
 
@@ -132,12 +132,16 @@
 				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
-					!tar.href.match(/.(jpg|png)$/i)){ //ignore picture link
+					!tar.href.match(/.(jpg|png)$/i) && //ignore picture link
+					!tar.href.match(/^javascript:/) //ignore javascript link
+				){ 
 					if(tar.href.indexOf('#')==0){
 						//hash
-						window.top.scminside = window;
-						window.top.location.hash = location.hash;
-						e.preventDefault();
+						if(tar.href != "#"){
+							window.top.scminside = window;
+							window.top.location.hash = location.hash;
+							e.preventDefault();
+						}
 					}else if(tar.title.match(/^(SCM:|\[SCM\])/i)){
 						//SCM Play link
 						var title = tar.title.replace(/^(SCM:|\[SCM\])( )?/i,'');
@@ -150,12 +154,15 @@
 						window.focus();
 						e.preventDefault();
 					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
-						//external links
-						window.open(tar.href,'_blank');
-						window.focus();
-						e.preventDefault();
+						if(tar.href.match(/^http(s)?/)){
+							//external links
+							window.open(tar.href,'_blank');
+							window.focus();
+							e.preventDefault();
+						}
 					}else if(history.pushState){
-						//internal link with pushState, change address bar href
+						//internal link & has pushState
+						//change address bar href
 						var url = filter(tar.href).replace(filter(destHost),'');
 						window.top.scminside = window;
 						window.top.history.pushState(null,null,url);
