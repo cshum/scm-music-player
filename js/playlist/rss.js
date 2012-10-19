@@ -13,9 +13,12 @@ define([
 			feed.setNumEntries(100);
 			feed.load(function(result){
 				callback(_.map(result.feed.entries,function(entry){
+					var url = entry.link;
+					if(entry.mediaGroups && entry.mediaGroups[0].contents[0].url)
+						url = entry.mediaGroups[0].contents[0].url;
 					return new Song({
 						title:entry.title,
-						url:entry.link
+						url:url
 					});
 				}));
 			});
