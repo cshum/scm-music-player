@@ -203,11 +203,6 @@ var	playback = null,
 		else next();
 	};
 		
-	playlist.subscribe(function(list){
-		//check empty playlist
-		if(!_(list).any(function(song){ return song.isValid(); }))
-			message('Empty Playlist');
-	});
 	return {
 		isShuffle:isShuffle, 
 		isPlay:isPlay,
