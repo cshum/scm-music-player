@@ -44,8 +44,8 @@ var	playback = null,
 					return list[i].name;
 		}
 		function done(result){
-			playlist(result);
 			message(null);
+			playlist(result);
 			var list = isShuffle() ? shuffledList():filteredList();
 			current(list[0]);
 			isPlay(autoPlay());
@@ -202,7 +202,12 @@ var	playback = null,
 		if(repeatMode()==2) start();
 		else next();
 	};
-	
+		
+	playlist.subscribe(function(list){
+		//check empty playlist
+		if(!_(list).any(function(song){ return song.isValid(); }))
+			message('Empty Playlist');
+	});
 	return {
 		isShuffle:isShuffle, 
 		isPlay:isPlay,
