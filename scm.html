@@ -76,12 +76,15 @@ require([
 		var config = SCM.config;
 		SCM.config = _.once(function(data){
 			config(data);
-			$('#skin,#contentW,#playerW,#playlistW').each(function(){
-				ko.applyBindings(SCM,this);
-				$(this).mousedown(function(){
-					return false;
+			ko.applyBindings(SCM,$('#skin').get(0));
+			setTimeout(function(){
+				$('#contentW,#playerW,#playlistW').each(function(){
+					ko.applyBindings(SCM,this);
+					$(this).mousedown(function(){
+						return false;
+					});
 				});
-			});
+			},200);
 		});
 
 		while(SCMQueue.length > 0)
