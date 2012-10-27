@@ -1,7 +1,7 @@
 define(['jquery','song'],function($,Song){
 	function parseId(url){
 		var prefix = '(list=|p=|/playlists/)',
-			id = '[a-zA-Z0-9]*',
+			id = '[a-zA-Z0-9_\-]*',
 			match = prefix+id;
 		return url.match(new RegExp(match))[0].replace(new RegExp(prefix),'');
 	}
