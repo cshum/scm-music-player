@@ -7,7 +7,7 @@ SCM Music Player is a free and open source web music player, that brings a seaml
 * __Continous Playback Cross Pages__ - Seamless playback throughout your website.
 * __Full Featured Control__ - With play, pause, next, previous, seek, shuffle, repeat mode, volume and more.
 * __Custom Skins__ - Match your look and feel. Choose or design your own skin with CSS.
-* __Dynamic Playlist__ - Music from various sources: MP3, RSS, SoundCloud, Youtube playlist - with HTML5 or Flash.
+* __Dynamic Playlist__ - Music from various sources: MP3, SoundCloud, exfm, Youtube, RSS in HTML5 or Flash.
 * __Flexible UI__ - Dockable player on top or bottom. Playlist can be toggled.
 * __Setup Wizard__ - Create your SCM Music Player without any pain.
 
