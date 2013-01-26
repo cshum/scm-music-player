@@ -19,6 +19,7 @@ var requirejs = ({
 			playback:{
 				'youtube':'(youtube.com|youtu.be)',
 				'soundcloud':'^http(s)?\:\/\/soundcloud.com',
+				"exfm": "^( *)(http(s)?://)?(www.)?ex.fm",
 				'soundmanager':'.*'
 			},
 			playlist:{
