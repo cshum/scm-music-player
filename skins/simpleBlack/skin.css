@@ -1,4 +1,4 @@
-#player,#player a{ color:#4f0e83; }
+#player,#player a{ color:#333; }
 #player{ background:url(sizerAndVol.png); background-position: bottom !important; background-repeat: repeat-x !important; }
 #player .mainImage{ background:url(main.png); }
 
