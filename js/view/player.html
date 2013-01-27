@@ -1,0 +1,59 @@
+<div id="player">
+	<div class="item button" data-bind="
+		click:previous,
+		maskBtn:{css:'mainImage'}
+		" id="previous"></div> 
+	<div class="item button" data-bind="
+		click:play,
+		visible:!isPlay(),
+		maskBtn:{hasOffset:false}
+		" id="play"></div> 
+	<div class="item button" data-bind="
+		click:pause,
+		visible:isPlay(),
+		maskBtn:{css:'mainImage'}
+		" id="pause"></div> 
+	<div class="item button" data-bind="
+		click:next,
+		maskBtn:{css:'mainImage'}
+		" id="next"></div> 
+	<div class="text" id="title" data-bind="
+		followLeft:'#seeker',
+		text:display
+		" >
+	</div> 
+	<div class="item" data-bind="
+		slider:playedFraction, 
+		sliderOptions:{step:0.00001,min:0,max:1,pauseable:true}
+		" id="seeker"> 
+		<div id="seekerSliderBase" class="ui-slider-handle"></div> 
+		<div id="seekerBase"></div> 
+		<div id="seekerBuffered" data-bind="
+			style:{width:(loadedFraction()*100)+'%'}
+			"></div> 
+	</div> 
+	<div class="text" id="tooltip"> 
+		<a href="http://scmplayer.net" target="_blank" >SCM Music Player</a> 
+	</div> 
+	<div class="text item" id="timer" data-bind="text:timer"></div> 
+	<div class="item ui-slider-horizontal" data-bind="
+		innerBound:{bound:'.bound',handle:'.ui-slider-handle'}
+		" id="volume" > 
+		<div class="bound" data-bind="
+			slider:volume,
+			sliderOptions:{liveUpdate:true},
+			caption:'Volume: '+volume()+'%',
+			captionOptions:{target:'#tooltip a',trigger:'slide'}
+			">
+		<div class="ui-slider-handle" id="volumeSlider"></div> 
+		</div>
+	</div> 
+	<div class="item button" id="list" 
+		data-bind="maskBtn:{css:'mainImage',align:'right'},
+		click:togglePlaylist,
+		caption:'Toggle Playlist',
+		captionOptions:{target:'#tooltip a',trigger:'hover'}
+		"></div> 
+	<div class="mainImage" id="baseRight"></div> 
+	<div class="mainImage" id="baseLeft"></div> 
+</div>

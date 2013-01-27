@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex" />
+<title>SCM Music Player</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<style type="text/css">
+body{overflow:hidden; background:transparent; }
+#contentW, #playlistW, #playerW{ position:absolute; overflow:hidden;}
+#contentW{z-index:10; top:0; bottom:0; left:0; right:0;}
+#playlistW{ z-index:1; right:0; top:0; bottom:0; width:0; }
+#playerW{z-index:2; left:0; right:0; height:0;}
+#content{ position:relative; height:100%; width:100%;  }
+</style>
+<link rel="stylesheet" type="text/css" href="css/scm.css" />
+<link rel="stylesheet" type="text/css" data-bind="attr:{href:skin}" id="skin" />
+
+</style>
+</head>
+<body>
+	<div id="contentW" data-bind="style:{top:placement()=='top'?'25px':'0',
+		bottom:placement()=='top'?'0':'25px', right:showPlaylist()?'202px':'0'}">
+<script type="text/javascript">
+(function(){
+ 	if(window==window.parent)
+		location.href = 'http://scmplayer.net';
+	var addEvent = function(elm, evType, fn) {
+			if(elm.addEventListener) 
+				elm.addEventListener(evType, fn);
+			else if (elm.attachEvent) 
+				elm.attachEvent('on' + evType, fn);
+			else
+				elm['on' + evType] = fn;
+		},
+		url = location.hash.substr(1),
+		host = url.substr(0,url.indexOf('/',10));
+
+	window.SCMQueue = [];
+	addEvent(window,'message',function(e){
+		var data = e.data;
+		if(data.indexOf('SCM')!=0) 
+			return;
+		if(window.SCM && window.Song)
+			(new Function("SCM,Song",data))(SCM,Song);
+		else
+			SCMQueue.push(data);
+	});
+	document.write('<iframe src="javascript:location.replace(\''+url+'\');" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
+})();
+</script>
+</div>
+<div id="playerW" data-bind="style:{ top:placement()=='top'?'0':'auto', 
+	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
+<div id="playlistW" data-bind="style:{top:placement()=='top'?'25px':'0',
+		bottom:placement()=='top'?'0':'25px', width:showPlaylist()?'202px':'0'}"></div>
+
+<script type="text/javascript" src="js/lib/soundmanager/soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" src="config.js?260113"></script>
+<script type="text/javascript" src="js/lib/require/require.js"></script>
+<script type="text/javascript" >
+require([
+	'knockout','jquery','underscore',
+	'text!view/player.html',
+	'text!view/playlist.html',
+	'scm','song','scm.ui',
+
+	'binding/slider',
+	'binding/scm'
+	],function(ko,$,_,playerView,playlistView,SCM,Song){
+		$("#playerW").html(playerView);
+		$("#playlistW").html(playlistView);
+
+		var config = SCM.config;
+		SCM.config = _.once(function(data){
+			config(data);
+			ko.applyBindings(SCM,$('#skin').get(0));
+			setTimeout(function(){
+				$('#contentW,#playerW,#playlistW').each(function(){
+					ko.applyBindings(SCM,this);
+					$(this).mousedown(function(){
+						return false;
+					});
+				});
+			},200);
+		});
+
+		while(SCMQueue.length > 0)
+			(new Function('SCM,Song',SCMQueue.shift()))(SCM,Song);
+		window.SCM = SCM;
+		window.Song = Song;
+
+		var resize = function(){
+			$('#content').height($('#contentW').height());
+		}
+		$(window).resize(_.throttle(resize,100));
+		resize();
+	});
+</script>
+</body>
+</html>
