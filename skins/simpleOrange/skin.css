@@ -20,18 +20,22 @@
 #player #list{ right:5px; }
 
 #player #seeker{ right:320px; }
-#player #seekerBase{ border-color:#6d3503; }
+#player #seekerBase{ border-color:#99620B; }
 #player #seekerBuffered{ background-color:#ff7700; }
-#player #seekerSliderBase{ background-color:#6d3503; }
+#player #seekerSliderBase{ background-color:#99620B; }
 
 #player #volume{ width:70px; right:33px; }
 #player #volumeSlider{ width:14px; background:url(sizerAndVol.png); }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #playlist,#playlist .module,#playlist h3{ border-color:#ff9200; color:#8f620b; }
 =======
 #playlist,#playlist .module,#playlist h3{ border-color:#ff9200; color:#99620B; }
 >>>>>>> 71057897143edc3b068099ddf97772dfd8fec63b
+=======
+#playlist,#playlist .module,#playlist h3{ border-color:#ff9200; color:#8f620b; }
+>>>>>>> 62c9ac7d059ba82bcfad13685fa2df01109a90d0
 #playlist h3{ background-color: #ff6a00; color:#FFF; }
 #playlist .even{background-color:#FFF;}
 #playlist .odd{ background-color:#ffeace;}
