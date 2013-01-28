@@ -19,9 +19,15 @@
 #player .text{ z-index:2; font-size:11px; height:20px; top:5px; cursor:default; }
 #player .button,#player .ui-slider-handle{cursor:pointer; }
  
+<<<<<<< HEAD
 #player #seekerSliderBase{ z-index:3; margin-left:-3.5px; top:8px; width:7px; height:8px; }
 #player #seekerBuffered{ z-index:1; width:70%; top:8px; height:8px; left:0; }
 #player #seekerBase{ z-index:2; width:100%; border:1px solid; top:8px; height:6px; left:-1px;  }
+=======
+#player #seekerSliderBase{ z-index:3; margin-left:-3px; top:9px; width:6px; height:7px; }
+#player #seekerBuffered{ z-index:1; width:70%; top:9px; height:7px; left:0; }
+#player #seekerBase{ z-index:2; width:100%; border:1px solid; top:9px; height:5px; left:-1px;  }
+>>>>>>> 71057897143edc3b068099ddf97772dfd8fec63b
 
 #player #tooltip{ width:115px; text-align:center; }
 
