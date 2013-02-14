@@ -13,7 +13,9 @@ SCM Music Player is a free and open source web music player, that brings a seaml
 
 This is the Github repository of SCM Music Player. You can fork my source code, report issues or feature request. 
 
-For more information please visit http://scmplayer.net.
+For more information please visit <http://scmplayer.net>.
+
+[SCM Music Player - Lessons Learned](http://adrian.cshum.com/post/43002199615/scm-music-player-lessons-learned)
 
 ##Usage
 
@@ -24,7 +26,7 @@ To start with, place files into your server, run __index.html__ and you will be 
 
 ##License
 
-(c) Copyright 2012-2013 Adrian C Shum
+Copyright 2012-2013 Adrian C Shum
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
