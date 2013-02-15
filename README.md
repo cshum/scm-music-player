@@ -15,7 +15,7 @@ This is the Github repository of SCM Music Player. You can fork my source code, 
 
 For more information please visit <http://scmplayer.net>.
 
-[SCM Music Player - Behind the Scenes](http://adrian.cshum.com/post/43002199615/scm-music-player-behind-the-scenes)
+[Behind the Scenes: SCM Music Player](http://adrian.cshum.com/post/43002199615/behind-the-scenes-scm-music-player)
 
 ##Usage
 
