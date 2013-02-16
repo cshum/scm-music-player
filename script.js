@@ -125,7 +125,9 @@
 			window.top.document.title = document.title;
 			//fix links
 			var filter = function(host){
-					return host.replace(/blogspot.[a-z.]*/i,'blogspot.com');
+					host = host.replace(/blogspot.[a-z.]*/i,'blogspot.com');
+					host = host.replace(/^(http(s)?:\/\/)?(www.)?/i,'');
+					return host;
 				};
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
