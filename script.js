@@ -135,38 +135,40 @@
 					!tar.href.match(/.(jpg|png)$/i) && //ignore picture link
 					!tar.href.match(/^javascript:/) //ignore javascript link
 				){ 
-					if(tar.href.indexOf('#')==0){
-						//hash
-						if(tar.href != "#"){
-							window.top.scminside = window;
-							window.top.location.hash = location.hash;
+					if(tar.getAttributeNode('onclick').textContent.indexOf('return false') == -1) {
+						if(tar.href.indexOf('#')==0){
+							//hash
+							if(tar.href != "#"){
+								window.top.scminside = window;
+								window.top.location.hash = location.hash;
+								e.preventDefault();
+							}
+						}else if(tar.title.match(/^(SCM:|\[SCM\])/i)){
+							//SCM Play link
+							var title = tar.title.replace(/^(SCM:|\[SCM\])( )?/i,'');
+							var url = tar.href;
+							SCM.play({title:title,url:url});
 							e.preventDefault();
-						}
-					}else if(tar.title.match(/^(SCM:|\[SCM\])/i)){
-						//SCM Play link
-						var title = tar.title.replace(/^(SCM:|\[SCM\])( )?/i,'');
-						var url = tar.href;
-						SCM.play({title:title,url:url});
-						e.preventDefault();
-					}else if(tar.href.match(/\.css$/)){
-						//auto add skin
-						window.open('http://scmplayer.net/#skin='+tar.href,'_blank');
-						window.focus();
-						e.preventDefault();
-					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
-						if(tar.href.match(/^http(s)?/)){
-							//external links
-							window.open(tar.href,'_blank');
+						}else if(tar.href.match(/\.css$/)){
+							//auto add skin
+							window.open('http://scmplayer.net/#skin='+tar.href,'_blank');
 							window.focus();
 							e.preventDefault();
+						}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
+							if(tar.href.match(/^http(s)?/)){
+								//external links
+								window.open(tar.href,'_blank');
+								window.focus();
+								e.preventDefault();
+							}
+						}else if(history.pushState){
+							//internal link & has pushState
+							//change address bar href
+							var url = filter(tar.href).replace(filter(destHost),'');
+							window.top.scminside = window;
+							window.top.history.pushState(null,null,url);
+							e.preventDefault();
 						}
-					}else if(history.pushState){
-						//internal link & has pushState
-						//change address bar href
-						var url = filter(tar.href).replace(filter(destHost),'');
-						window.top.scminside = window;
-						window.top.history.pushState(null,null,url);
-						e.preventDefault();
 					}
 				}
 			});
