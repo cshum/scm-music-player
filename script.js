@@ -126,7 +126,7 @@
 			//fix links
 			var filter = function(host){
 					host = host.replace(/blogspot.[a-z.]*/i,'blogspot.com');
-					host = host.replace(/^(http(s)?:\/\/)www\./i,'');
+					host = host.replace(/^(http(s)?:\/\/)?(www.)?/i,'');
 					return host;
 				};
 			addEvent(document.body,'click',function(e){
