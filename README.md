@@ -27,8 +27,9 @@ To start with, place files into your server, run __index.html__ and you will be 
 SCM Music Player is made possible with these open source projects:
 
 * [Soundmanager 2](http://www.schillmania.com/projects/soundmanager2/) - Javascript sound API supporting HTML5 and Flash.
-* [KnockoutJS](http://knockoutjs.com/) - Javascript MVVM framework that does data binding and dependency tracking.
-* [RequireJS](http://requirejs.org/) - Javascript Module loader. Uses Asynchronous Module Definition (AMD).
+* [Knockout.js](http://knockoutjs.com/) - Javascript MVVM framework that does data binding and dependency tracking.
+* [Require.js](http://requirejs.org/) - Javascript Module loader using AMD (Asynchronous Module Definition).
+* [Underscore.js](http://underscorejs.org/) - Javascript utility library.
 * [jQuery](http://jquery.com/) - Something.
 
 ##License
