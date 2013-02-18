@@ -23,6 +23,13 @@ Normally you don't need to download anything to use SCM Music Player. Just go to
 
 To start with, place files into your server, run __index.html__ and you will be redirected to the Setup Wizard, configured for your self hosted SCM Music Player.
 
+##Credits
+SCM Music Player is made possible with these open source projects:
+
+* [Soundmanager 2](http://www.schillmania.com/projects/soundmanager2/) - Javascript sound API supporting HTML5 and Flash.
+* [Knockoutjs](http://knockoutjs.com/) - Javascript MVVM framework that does data binding and dependency tracking.
+* [Requirejs](http://knockoutjs.com/) - Javascript Module loader. Uses Asynchronous Module Definition (AMD).
+* [jQuery](http://jquery.com/) - Something.
 
 ##License
 
