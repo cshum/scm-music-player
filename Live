@@ -1,0 +1,4 @@
+<!-- SCM Music Player http://scmplayer.net -->
+<script type="text/javascript" src="http://scmplayer.net/script.js" 
+data-config="{'skin':'skins/black/skin.css','volume':100,'autoplay':true,'shuffle':false,'repeat':1,'placement':'top','showplaylist':false,'playlist':[{'title':'','url':'http://www.youtube.com/watch?v=sV4_wHvP7b8'},{'title':'','url':'http://www.youtube.com/watch?v=ydHTMVsTMtI'},{'title':'','url':'http://www.youtube.com/watch?v=QzvGKas5RsU'},{'title':'','url':'http://www.youtube.com/watch?v=Tc7W8Q-g9Lg'},{'title':'','url':'http://www.youtube.com/watch?v=klk8QPcfFYQ'},{'title':'','url':'http://www.youtube.com/watch?v=SoKT900YbCc'},{'title':'','url':'http://www.youtube.com/watch?v=8FbF18hDosw'},{'title':'','url':'http://www.youtube.com/watch?v=H3samZDs0ak'},{'title':'','url':'http://www.youtube.com/watch?v=VDvr08sCPOc'},{'title':'','url':'http://www.youtube.com/watch?v=ajaxQYNonyg'}]}" ></script>
+<!-- SCM Music Player script end -->
