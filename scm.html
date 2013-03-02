@@ -48,7 +48,7 @@ body{overflow:hidden; background:transparent; }
 		else
 			SCMQueue.push(data);
 	});
-	document.write('<iframe src="." frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
+	document.write('<iframe src="javascript:location.replace(\''+url+'\');" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
 })();
 </script>
 </div>
