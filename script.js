@@ -155,7 +155,7 @@
 						window.open('http://scmplayer.net/#skin='+tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
+					}else if(filter(tar.href).indexOf(filter(location.host))!=0 ){
 						if(tar.href.match(/^http(s)?/)){
 							//external links
 							window.open(tar.href,'_blank');
