@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="robots" content="noindex" />
 <title>SCM Music Player</title>
-<link rel="icon" type="image/png" href="icon.png">
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="icon.png" />
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <style type="text/css">
 body{overflow:hidden; background:transparent; }
@@ -17,8 +17,6 @@ body{overflow:hidden; background:transparent; }
 </style>
 <link rel="stylesheet" type="text/css" href="css/scm.css" />
 <link rel="stylesheet" type="text/css" data-bind="attr:{href:skin}" id="skin" />
-
-</style>
 </head>
 <body>
 	<div id="contentW" data-bind="style:{top:placement()=='top'?'25px':'0',
@@ -56,6 +54,7 @@ body{overflow:hidden; background:transparent; }
 	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
 <div id="playlistW" data-bind="style:{top:placement()=='top'?'25px':'0',
 		bottom:placement()=='top'?'0':'25px', width:showPlaylist()?'202px':'0'}"></div>
+<div id="mediaW"></div>
 
 <script type="text/javascript" src="js/lib/soundmanager/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" src="config.js?260113"></script>
