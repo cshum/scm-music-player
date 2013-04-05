@@ -13,9 +13,7 @@
 				<span class="title" data-bind="text:title"></span>&nbsp;
 			</li> 
       <!-- /ko -->
-      <!-- ko if:showAd-->
-      <li style="height:150px; cursor:default; list-style-type:none;"></li>
-      <!-- /ko -->
+      <li data-bind="visible:showAd" style="height:150px; cursor:default; list-style-type:none;"></li>
 		</ol> 
 	</div>
   <div id="mediaContainer">
