@@ -2,8 +2,9 @@
 	<div class="module"> 
 		<h3>Playlist</h3> 
 	</div> 
-	<div class="module" id="playlistContainer">
-		<ol class="items" data-bind="foreach:playlist"> 
+  <div class="module" id="playlistContainer">
+		<ol class="items" > 
+      <!-- ko foreach:playlist -->
 			<li class="item" data-bind="
 			visible:isValid(),
 			click:$root.play,
@@ -11,6 +12,15 @@
 			">
 				<span class="title" data-bind="text:title"></span>&nbsp;
 			</li> 
+      <!-- /ko -->
+      <!-- ko if:showAd-->
+      <li style="height:150px; cursor:default; list-style-type:none;"></li>
+      <!-- /ko -->
 		</ol> 
 	</div>
+  <div id="mediaContainer">
+    <!-- BuySellAds Zone Code -->
+    <div id="bsap_1285022" class="bsarocks bsap_09cb595ac00d408b4665ea9a271bdd97"></div>
+    <!-- End BuySellAds Zone Code -->
+  </div>
 </div>

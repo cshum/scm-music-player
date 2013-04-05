@@ -15,7 +15,7 @@ body{overflow:hidden; background:transparent; }
 #playerW{z-index:2; left:0; right:0; height:0;}
 #content{ position:relative; height:100%; width:100%;  }
 </style>
-<link rel="stylesheet" type="text/css" href="css/scm.css" />
+<link rel="stylesheet" type="text/css" href="css/scm.css?167" />
 <link rel="stylesheet" type="text/css" data-bind="attr:{href:skin}" id="skin" />
 </head>
 <body>
@@ -54,10 +54,9 @@ body{overflow:hidden; background:transparent; }
 	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
 <div id="playlistW" data-bind="style:{top:placement()=='top'?'25px':'0',
 		bottom:placement()=='top'?'0':'25px', width:showPlaylist()?'202px':'0'}"></div>
-<div id="mediaW"></div>
 
 <script type="text/javascript" src="js/lib/soundmanager/soundmanager2-nodebug-jsmin.js"></script>
-<script type="text/javascript" src="config.js?260113"></script>
+<script type="text/javascript" src="config.js"></script>
 <script type="text/javascript" src="js/lib/require/require.js"></script>
 <script type="text/javascript" >
 require([
@@ -96,6 +95,17 @@ require([
 		}
 		$(window).resize(_.throttle(resize,100));
 		resize();
+
+    var 
+    shown = false,
+    checkAd = function(){
+      if(SCM.showAd() && !shown){
+        $.getScript('http://s3.buysellads.com/ac/bsa.js');
+        shown = true;
+      }
+    };
+    SCM.showAd.subscribe(checkAd);
+    checkAd();
 	});
 </script>
 </body>
