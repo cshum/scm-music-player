@@ -30,8 +30,7 @@ var requirejs = ({
 		}
 	},
 	waitSeconds: 900,
-	baseUrl: 'js/',
-  urlArgs:'167'
+	baseUrl: 'js/'
 });
 
 soundManager.preferFlash = false;
