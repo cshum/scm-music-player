@@ -16,7 +16,7 @@
 
 #player #seeker{ right:320px; }
 #player #seekerBase{ border-color:#084670; }
-#player #seekerBuffered{ background-color:#b0dfff; }
+#player #seekerBuffered{ background-color:#dbf6ff; }
 #player #seekerSliderBase{ background-color:#084670; }
 
 #player #volume{ width:70px; right:33px; }
@@ -25,5 +25,5 @@
 #playlist,#playlist .module,#playlist h3{ border-color:#03385c; color:#084670; }
 #playlist h3{ background-color: #084670; color:#FFF;}
 #playlist .even{background-color:#FFF;}
-#playlist .odd{ background-color:#b0dfff;}
+#playlist .odd{ background-color:#dff6ff;}
 #playlist .focus{ background-color:#084670; color:#FFF;}

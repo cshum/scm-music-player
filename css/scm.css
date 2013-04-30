@@ -32,9 +32,10 @@
  
 #playlist li{ cursor:pointer; }
 #playlist .items{ 
-	overflow-x:hidden; overflow-y:auto; height:100%; 
+	overflow-x:hidden; overflow-y:auto; 
 	list-style-type:decimal;
 	list-style-position: inside;
+  position:absolute;
+  top:0; bottom:0; right:0; left:0;
 }
 #playlist .item{ cursor:pointer; padding: 3px 5px; width:1000px; }
-
