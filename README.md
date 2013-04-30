@@ -15,7 +15,7 @@ This is the Github repository of SCM Music Player. You can fork my source code, 
 
 For more information please visit <http://scmplayer.net>.
 
-[Behind the Scenes: SCM Music Player](http://cshum.com/2013/01/behind-the-scenes-scm-music-player/)
+[Behind the Scenes](http://cshum.com/2013/01/behind-the-scenes-scm-music-player/)
 
 ##Usage
 
@@ -26,11 +26,11 @@ To start with, place files into your server, run __index.html__ and you will be 
 ##Credits
 SCM Music Player is made possible with these open source projects:
 
-* [Soundmanager 2](http://www.schillmania.com/projects/soundmanager2/) - Javascript sound API supporting HTML5 and Flash.
-* [Knockout.js](http://knockoutjs.com/) - Javascript MVVM framework that does data binding and dependency tracking.
+* [Soundmanager 2](http://www.schillmania.com/projects/soundmanager2/) - Javascript Sound API supporting HTML5 and Flash.
+* [Knockout.js](http://knockoutjs.com/) - Javascript MVVM framework does data binding and dependency tracking.
 * [Require.js](http://requirejs.org/) - Javascript Module loader using AMD (Asynchronous Module Definition).
 * [Underscore.js](http://underscorejs.org/) - Javascript utility library.
-* [jQuery](http://jquery.com/) - Something.
+* [jQuery](http://jquery.com/).
 
 ##License
 
