@@ -38,4 +38,4 @@
   position:absolute;
   top:0; bottom:0; right:0; left:0;
 }
-#playlist .item{ cursor:pointer; padding:5px; width:1000px; }
+#playlist .item{ cursor:pointer; padding:4px 5px; width:1000px; }
