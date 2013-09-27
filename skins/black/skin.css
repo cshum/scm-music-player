@@ -1,4 +1,4 @@
-#player,#player a{ color:#fff; }
+#player,#player a{ color:#000; }
 #player{ background:url(sizerAndVol.png); background-position:bottom; }
 #player .mainImage{ background:url(main.png); }
 
