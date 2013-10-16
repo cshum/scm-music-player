@@ -1,0 +1,30 @@
+SCM.play();
+    Plays the current song.
+SCM.pause();
+    Pause the currently playing song.
+SCM.previous();
+    Loads the previous song in playlist.
+SCM.next();
+    Loads the next song in playlist.
+SCM.queue({title:'x',url:'y'});
+    Queue a song title x url y to the playlist.
+SCM.play({title:'x',url:'y'});
+    Add a song title x url y to the playlist and play it.
+SCM.volume(vol);
+    Sets the volume. Accepts an integer vol between 0 and 100.
+SCM.skin('x');
+    Change skin of SCM Music Player, with x being the link to a custom skin css file.
+SCM.placement(pos);
+    Change placement of the player bar. Accepts a string pos 'top' or 'bottom'
+SCM.loadPlaylist('x');
+    Loads the specified playlist url x.
+SCM.loadPlaylist([{title:'x1',url:'y1'}, {title:'x2',url:'y2'}, ...]);
+    Loads the specified list of songs with their title and url respectively.
+SCM.repeatMode(no);
+    Set the repeat mode of playlist. Accepted values of no are:
+    0 (play playlist once), 1 (repeat playlist), 2 (repeat item).
+SCM.isShuffle(x);
+    Set whether playback order should be shuffled. Accepts a boolean x true or false.
+SCM.showPlaylist(x);
+    Set whether playlist is being shown. Accepts a boolean x true or false. Fork me on GitHub
+
