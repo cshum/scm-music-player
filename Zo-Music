@@ -1,0 +1,24 @@
+<div id="playlist">
+<div class="module">
+<h3>Playlist</h3>
+</div>
+  <div class="module" id="playlistContainer">
+    <ol class="items" data-bind="style:{bottom:showAd()?'150px':'0'}">
+      <!-- ko foreach:playlist -->
+<li class="item" data-bind="
+visible:isValid(),
+click:$root.play,
+css:{focus:on, even:$index()%2==1, odd:$index()%2==0}
+">
+<span class="title" data-bind="text:title"></span>&nbsp;
+</li>
+      <!-- /ko -->
+</ol>
+    <div class="odd" data-bind="visible:showAd"
+      style="z-index:167; position:absolute; height:150px; left:0; right:0; bottom:0; padding:0 10px;" >
+      <!-- BuySellAds Zone Code -->
+      <div id="bsap_1285022" class="bsarocks bsap_09cb595ac00d408b4665ea9a271bdd97"></div>
+      <!-- End BuySellAds Zone Code -->
+    </div>
+</div>
+</div>
