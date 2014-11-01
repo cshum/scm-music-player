@@ -1,41 +1,32 @@
-#player, #playlist{
-	position:relative; height:100%; width:100%; font-size:11px;  
-	font-family:Verdana,Arial,sans-serif; cursor:default; line-height:1.2; 
-}
+#player, #player a{ color:#bad8eb;   font-size:  12px; font-family: tahoma;7   }
+#player{ background:url(http://static.tumblr.com/d41lcii/vVTmevuna/simplesazulclarovolume.png); background-position:bottom ; background-color: #ffffff; }
+#player .mainImage { background: url(http://static.tumblr.com/d41lcii/2Wsmevumw/simplesazulclaro.png);}
 
-#player .item, #player .mainImage, #player .ui-slider-handle,
-#player #seekerSlider,#player #seeker
-{ height:25px; top:0; position:absolute; }
-#player .text, #player #seekerBase, #player #seekerBuffered, #player{ position:absolute; }
+#player #baseLeft{ width:93px; } 
+#player #baseRight{ width:145px;} 
+#player .button{ width:26px; } 
+#player #play{ background:url(http://static.tumblr.com/d41lcii/nZ3mevun2/simplesazulclaropause.png); } 
+#player #play,#player #pause{ left:26px; } 
+#player #previous{ left:0px; } 
+#player #next{ left:52px; } 
+#player #title{ left:90px; font-size: 12px; } 
+#player #tooltip{ right:196px; } 
+#player #timer{ right:120px; } 
+#player #list{ right:0px; }
 
-#player a{ text-decoration:none; }
-#player a:hover{ text-decoration:underline; }
- 
-#player #baseLeft{ z-index:1; }
-#player #baseRight{ z-index:1; right:0; background-position:right top; }
-#player #play{ z-index:3; }
-#player .item{ z-index:2; }
-#player .bound{ position:relative;height:100%; }
-#player .text{ z-index:2; font-size:11px; height:20px; top:5px; cursor:default; }
-#player .button,#player .ui-slider-handle{cursor:pointer; }
- 
-#player #seekerSliderBase{ z-index:3; margin-left:-3px; top:9px; width:6px; height:7px; }
-#player #seekerBuffered{ z-index:1; width:70%; top:9px; height:7px; left:0; }
-#player #seekerBase{ z-index:2; width:100%; border:1px solid; top:9px; height:5px; left:-1px;  }
+#player #seeker{ right:320px; } 
+#player #seekerBase{ border-color:#ffffff; } 
+#player #seekerBuffered{ background-color:#bad8eb; } 
+#player #seekerSliderBase{ background-color:#ffffff; }
 
-#player #tooltip{ width:115px; text-align:center; }
+#player #volume{ width:65px; right:39px; } 
+#player #volumeSlider{ width:8px; background:url(http://static.tumblr.com/d41lcii/vVTmevuna/simplesazulclarovolume.png); }
 
-#playlist{ border-bottom:1px solid; }
-#playlist .module{ background:white; border:1px solid; border-bottom:none; }
-#playlistContainer{ position:absolute;top:20px;bottom:0;left:0;right:0;z-index:1; }
-#playlist h3{ border-bottom:1px solid; font-weight:bold; padding: 3px 5px;}
- 
-#playlist li{ cursor:pointer; }
-#playlist .items{ 
-	overflow-x:hidden; overflow-y:auto; 
-	list-style-type:decimal;
-	list-style-position: inside;
-  position:absolute;
-  top:0; bottom:0; right:0; left:0;
-}
-#playlist .item{ cursor:pointer; padding:4px 5px; width:1000px; }
+#playlist,#playlist .module,#playlist h3{ border-color:#ffffff;}
+#playlist .module{  color:#COR DA FONT DA PLAY; background-color:#ffffff; }
+#playlist h3{ background:url(http://dl.dropbox.com/u/58708531/bar2.jpg); color:#000000; background-color:#ffffff;  }
+#playlist .even{background-color:#fff;}
+#playlist .odd{ background-color:#fff;}
+#playlist .focus{ background-color:#fff; color:#aaa;}
+
+
