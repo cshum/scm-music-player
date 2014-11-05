@@ -1,29 +1,26 @@
-#player,#player a{ color:#fff; }
-#player{ background:url(sizerAndVol.png); background-position:bottom; }
-#player .mainImage{ background:url(main.png); }
-
+#player,#player a{ color:#000; }
+#player{ background:url(http://static.tumblr.com/qmfr3ui/rZLmzu8up/plbird2.png); background-position:bottom; background-color: #transparent; }
+#player .mainImage{ background:url(http://static.tumblr.com/qmfr3ui/XHpmzuc5a/pbird1.png); }
 #player #baseLeft{ width:93px; }
 #player #baseRight{ width:145px;}
-#player .button{  width:22px; }
-#player #play{ background:url(playBtn.png); }
-#player #play,#player #pause{ left:32px; }
-#player #previous{ left:8px; }
-#player #next{ left:55px; }
-#player #title{ left:95px;  }
+#player .button{ width:26px; }
+#player #play{ background:url(http://static.tumblr.com/qmfr3ui/o3Cmzua56/ppbird1.png); }
+#player #play,#player #pause{ left:26px; }
+#player #previous{ left:0px; }
+#player #next{ left:52px; }
+#player #title{ left:90px; }
 #player #tooltip{ right:196px; }
-#player #timer{ right:122px;  }
-#player #list{ right:5px; }
-
+#player #timer{ right:120px; }
+#player #list{ right:0px; }
 #player #seeker{ right:320px; }
-#player #seekerBase{ border-color:#e4f4d1; }
-#player #seekerBuffered{ background-color:#a4da6f; }
-#player #seekerSliderBase{ background-color:#fff; }
-
-#player #volume{ width:70px; right:33px; }
-#player #volumeSlider{ width:14px; background:url(sizerAndVol.png); }
-
-#playlist,#playlist .module,#playlist h3{ border-color:#86cf60; color:#529701; }
-#playlist h3{ background:url(bar.jpg);  text-shadow: white 1px 1px; }
-#playlist .even{background-color:#FFF;}
-#playlist .odd{ background-color:#f0ffe3;}
-#playlist .focus{ background-color:#3f7400; color:#FFF;}
+#player #seekerBase{ border-color:#000 ; }
+#player #seekerBuffered{ background-color:# ; }
+#player #seekerSliderBase{ background-color:#000; }
+#player #volume{ width:65px; right:39px; }
+#player #volumeSlider{ width:8px; background:url(http://static.tumblr.com/qmfr3ui/O3amzubvu/vheart1.png); }
+#playlist,#playlist .module,#playlist h3{ border-color:#transparent; }
+#playlist .module{ color:#9C9C9C; background-color:#transparent; }
+#playlist h3{ background:url(http://static.tumblr.com/qmfr3ui/NQbmzuat5/bbird1.png); color:#000; background-color:#transparent; }
+#playlist .even{background-color:#F8F8FF; }
+#playlist .odd{ background-color:#transparent; }
+#playlist .focus{ background-color:# ; color:#000;}
