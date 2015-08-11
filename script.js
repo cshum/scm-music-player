@@ -131,7 +131,8 @@
 				};
 			addEvent(document.body,'click',function(e){
 				var tar = e.target;
-				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body) 
+				var ext = (tar.target == '_blank');
+				while(!tar.tagName.match(/^(a|area)$/i) && tar!=document.body)
 					tar = tar.parentNode;
 				if(tar.tagName.match(/^(a|area)$/i) && 
 					!tar.href.match(/.(jpg|png)$/i) && //ignore picture link
@@ -155,7 +156,7 @@
 						window.open('http://scmplayer.net/#skin='+tar.href,'_blank');
 						window.focus();
 						e.preventDefault();
-					}else if(filter(tar.href).indexOf(filter(location.host))==-1 ){
+					}else if(ext || filter(tar.href).indexOf(filter(location.host))==-1 ){
 						if(tar.href.match(/^http(s)?/)){
 							//external links
 							window.open(tar.href,'_blank');
