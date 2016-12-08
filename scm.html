@@ -11,9 +11,10 @@
 body{overflow:hidden; background:transparent; }
 #contentW, #playlistW, #playerW{ position:absolute; overflow:hidden;}
 #contentW{z-index:10; top:0; bottom:0; left:0; right:0;}
+#contentW.i-device{overflow:scroll; -webkit-overflow-scrolling:touch;}
 #playlistW{ z-index:1; right:0; top:0; bottom:0; width:0; }
 #playerW{z-index:2; left:0; right:0; height:0;}
-#content{ position:relative; height:100%; width:100%;  }
+#content{ position:relative; height:100%; width:100%; }
 </style>
 <link rel="stylesheet" type="text/css" href="css/scm.css?168" />
 <link rel="stylesheet" type="text/css" data-bind="attr:{href:skin}" id="skin" />
@@ -46,6 +47,9 @@ body{overflow:hidden; background:transparent; }
 		else
 			SCMQueue.push(data);
 	});
+	if(/(iPad|iPhone|iPod)/g.test( navigator.userAgent)) {
+		document.getElementById('contentW').className = 'i-device';
+	}
 	document.write('<iframe src="javascript:location.replace(\''+url+'\');" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
 })();
 </script>
