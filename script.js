@@ -75,6 +75,7 @@
 				head.removeChild(head.firstChild);
 			*/
 			
+			/*
 			var scmframe = document.createElement('iframe');
 			scmframe.frameBorder = 0;
 			scmframe.id = "scmframe";
@@ -91,7 +92,8 @@
 						document.body.removeChild(document.body.lastChild);
 				},0);
 			});
-
+			*/
+			
 			//fix frame height in IE
 			addEvent(window,'resize',function(){
 				scmframe.style.height = (function(){
