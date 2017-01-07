@@ -1,0 +1,34 @@
+#player,#player a{ color:#BEBEBE;  font-size: 10px; font-family: tahoma;}
+#player{ background:url(http://static.tumblr.com/gj5ndh2/G5qmg5zs0/1.gif); background-position:bottom; background-color: #ffffff;}
+#player .mainImage{ background:url(http://static.tumblr.com/gj5ndh2/l0lmg5zlh/mainr.png); }
+
+#player #baseLeft{ width:93px; }
+#player #baseRight{ width:145px;}
+#player .button{  width:26px; }
+#player #play{ background:url(http://ranger.gamebanana.com/img/ico/sprays/_1590-.png); }
+#player #play,#player #pause{ left:26px; }
+#player #previous{ left:0px; }
+#player #next{ left:52px; }
+#player #title{ left:90px;  font-size: 9px; }
+#player #tooltip{ right:196px; }
+#player #timer{ right:120px;  }
+#player #list{ right:0px; }
+
+#player #seeker{ right:320px; }
+#player #seekerBase{ border-color:#ffffff;  }
+#player #seekerBuffered{ background-color:#BEBEBE; }
+#player #seekerSliderBase{ background-color:#ffffff; }
+
+#player #volume{ width:65px; right:39px; }
+#player #volumeSlider{ width:8px; background:url(http://static.tumblr.com/gj5ndh2/G5qmg5zs0/1.gif); }
+
+#playlist,#playlist .module,#playlist h3{ border-color:#ffffff;}
+#playlist .module{  color:#BEBEBE; background-color:#ffffff; }
+#playlist h3{ background:url(http://dl.dropbox.com/u/58708531/bar2.jpg); color:#BEBEBE; background-color:#ffffff;  }
+#playlist .even{background-color:#fff;}
+#playlist .odd{ background-color:#fff;}
+#playlist .focus{ background-color:#fff; color:#aaa;}
+
+
+                                                            < ! ----- Skin feita por Reatou / Não use como base / Não disponibilize /  NUNCA
+retire esses créditos / No copy bitttch -xoxo ----- ! >
