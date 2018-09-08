@@ -46,6 +46,7 @@ body{overflow:hidden; background:transparent; }
 		else
 			SCMQueue.push(data);
 	});
+	url = url.replace(/\%27/g, '%2527');
 	document.write('<iframe src="javascript:location.replace(\''+url+'\');" frameborder="0" id="content" allowtransparency="true" name="content"></iframe>');
 })();
 </script>
