@@ -26,9 +26,9 @@ body{overflow:hidden; background:transparent; }
  	if(window==window.parent)
 		location.href = 'http://scmplayer.net';
 	var addEvent = function(elm, evType, fn) {
-			if(elm.addEventListener) 
+			if(elm.addEventListener)
 				elm.addEventListener(evType, fn);
-			else if (elm.attachEvent) 
+			else if (elm.attachEvent)
 				elm.attachEvent('on' + evType, fn);
 			else
 				elm['on' + evType] = fn;
@@ -39,7 +39,7 @@ body{overflow:hidden; background:transparent; }
 	window.SCMQueue = [];
 	addEvent(window,'message',function(e){
 		var data = e.data;
-		if(data.indexOf('SCM')!=0) 
+		if(data.indexOf('SCM')!=0)
 			return;
 		if(window.SCM && window.Song)
 			(new Function("SCM,Song",data))(SCM,Song);
@@ -51,7 +51,7 @@ body{overflow:hidden; background:transparent; }
 })();
 </script>
 </div>
-<div id="playerW" data-bind="style:{ top:placement()=='top'?'0':'auto', 
+<div id="playerW" data-bind="style:{ top:placement()=='top'?'0':'auto',
 	bottom:placement()=='top'?'auto':'0',height:'25px'}"></div>
 <div id="playlistW" data-bind="style:{top:placement()=='top'?'25px':'0',
 		bottom:placement()=='top'?'0':'25px', width:showPlaylist()?'202px':'0'}"></div>
@@ -97,7 +97,7 @@ require([
 		$(window).resize(_.throttle(resize,100));
 		resize();
 
-    var 
+    var
     shown = false,
     checkAd = function(){
       if(SCM.showAd() && !shown){
