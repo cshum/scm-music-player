@@ -1,6 +1,6 @@
 define([
 	'scm','jquery',
-	'http://www.youtube.com/iframe_api'
+	'https://www.youtube.com/iframe_api'
 	],function(SCM,$){
 
 	var id="SCMYoutube",
