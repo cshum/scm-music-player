@@ -6,7 +6,7 @@ define(['scm','playback/soundmanager!','jquery'],function(SCM,sm,$){
 				current;
 			callback({
 				on:function(url,finishCallback){
-					var resolveURL = 'http://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' 
+					var resolveURL = 'https://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' 
 						+ consumer_key + '&callback=?';
 					current = $.getJSON(resolveURL, function(track){
 						var url = track.stream_url;
