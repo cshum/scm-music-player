@@ -28,7 +28,7 @@ define(['jquery','song'],function($,Song){
 
 	return {
 		load:function(url, req, callback, config){
-			load('http://api.soundcloud.com/resolve?url=' + url,callback);
+			load('https://api.soundcloud.com/resolve?url=' + url,callback);
 		}
 	}
 });
